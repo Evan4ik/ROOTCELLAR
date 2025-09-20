@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://svnf5bxoysdo"]
+
+[ext_resource type="Script" uid="uid://cfm23rcexmnu8" path="res://scripts/food/bread.gd" id="1_rx1to"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rx1to"]
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.622196, 0.384225, 0.221077, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m4rxf"]
+radius = 0.0643569
+height = 0.217727
+
+[node name="foodobj" type="RigidBody3D"]
+mass = 2.672
+script = ExtResource("1_rx1to")
+foodName = "Bread"
+foodDescription = "A nice snack and a good base ingredient"
+foodCategory = 1
+passiveDesc = "Restores %s HP on pickup"
+activeDesc = "Gain %s Temporary HP"
+
+[node name="mesh" type="CSGSphere3D" parent="."]
+transform = Transform3D(0.438608, 0, 0, 0, 0.438608, 0, 0, 0, 0.896599, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_rx1to")
+
+[node name="coll" type="CollisionShape3D" parent="."]
+transform = Transform3D(4.00023, 0, 0, 0, -1.74856e-07, -4.00023, 0, 4.00023, -1.74856e-07, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_m4rxf")
+
+[node name="foodarea" type="Area3D" parent="."]
+transform = Transform3D(1.16895, 0, 0, 0, 1.16895, 0, 0, 0, 1.16895, 0, 0, 0)
+
+[node name="coll" type="CollisionShape3D" parent="foodarea"]
+transform = Transform3D(4.00023, 0, 0, 0, -1.74856e-07, -4.00023, 0, 4.00023, -1.74856e-07, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_m4rxf")

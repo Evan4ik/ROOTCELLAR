@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://dggw0xtnul7do"]
+
+[ext_resource type="Script" uid="uid://c0yxfcmfm6d8p" path="res://scripts/food/potato.gd" id="1_w3fqf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3fqf"]
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.90732, 0.807189, 0.226914, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_icol3"]
+radius = 0.0571211
+height = 0.167557
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2a5fs"]
+
+[node name="foodobj" type="RigidBody3D"]
+mass = 2.672
+script = ExtResource("1_w3fqf")
+foodName = "Potato"
+foodDescription = "You'd be surprised at how many things you can do with one of these."
+foodCategory = 2
+passiveAmt = 1.5
+passiveDesc = "Increase weapon range by x%s "
+activeAmt = 1.25
+activeDesc = "Permanently increase range of current weapon by x%s"
+
+[node name="mesh" type="CSGSphere3D" parent="."]
+transform = Transform3D(0.438608, 0, 0, 0, 0.402953, 0, 0, 0, 0.685574, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_w3fqf")
+
+[node name="coll" type="CollisionShape3D" parent="."]
+transform = Transform3D(4.00023, 0, 0, 0, -1.74856e-07, -4.00023, 0, 4.00023, -1.74856e-07, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_icol3")
+
+[node name="foodarea" type="Area3D" parent="."]
+transform = Transform3D(1.16895, 0, 0, 0, 1.16895, 0, 0, 0, 1.16895, 0, 0, 0)
+
+[node name="coll" type="CollisionShape3D" parent="foodarea"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("SphereShape3D_2a5fs")

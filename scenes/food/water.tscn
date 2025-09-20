@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://bykust06hrvhm"]
+
+[ext_resource type="Script" uid="uid://dqmhby3lal428" path="res://scripts/food/water.gd" id="1_6dekt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dekt"]
+transparency = 1
+albedo_color = Color(0.46, 0.748, 1, 0.333333)
+refraction_enabled = true
+refraction_scale = -0.37
+refraction_texture_channel = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hxoen"]
+radius = 0.0245133
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v7gbj"]
+radius = 0.0627622
+
+[node name="foodobj" type="RigidBody3D"]
+mass = 0.756
+script = ExtResource("1_6dekt")
+foodName = "Water"
+foodDescription = "Liquid found in most places and things."
+foodCategory = 7
+passiveDesc = "Restore %s HP every 60 seconds."
+activeAmt = 2.0
+activeDesc = "Restore %s HP."
+
+[node name="mesh" type="CSGSphere3D" parent="."]
+transform = Transform3D(0.2634, 0, 0, 0, 0.2634, 0, 0, 0, 0.2634, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6dekt")
+
+[node name="coll" type="CollisionShape3D" parent="."]
+transform = Transform3D(4.00023, 0, 0, 0, -1.74856e-07, -4.00023, 0, 4.00023, -1.74856e-07, 0, 0, 0)
+shape = SubResource("SphereShape3D_hxoen")
+disabled = true
+
+[node name="foodarea" type="Area3D" parent="."]
+transform = Transform3D(1.16895, 0, 0, 0, 1.16895, 0, 0, 0, 1.16895, 0, 0, 0)
+
+[node name="coll" type="CollisionShape3D" parent="foodarea"]
+transform = Transform3D(4.00023, 0, 0, 0, -1.74856e-07, -4.00023, 0, 4.00023, -1.74856e-07, 0, 0, 0)
+shape = SubResource("SphereShape3D_v7gbj")

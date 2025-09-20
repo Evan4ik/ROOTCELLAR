@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://dy4bo3or4ynv"]
+
+[ext_resource type="Script" uid="uid://rnsblggr621a" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="PackedScene" uid="uid://cp1ipvrhfab0l" path="res://scenes/weapons/weapon.tscn" id="2_g2els"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
+radius = 0.737021
+height = 2.38792
+
+[node name="player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_3vyb7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_u8vuu")
+
+[node name="cameraviewport" type="SubViewportContainer" parent="."]
+visible = false
+offset_right = 960.0
+offset_bottom = 540.0
+stretch = true
+stretch_shrink = 2
+
+[node name="viewport" type="SubViewport" parent="cameraviewport"]
+handle_input_locally = false
+msaa_3d = 1
+use_occlusion_culling = true
+size = Vector2i(480, 270)
+size_2d_override_stretch = true
+render_target_update_mode = 0
+
+[node name="camera" type="Camera3D" parent="cameraviewport/viewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+far = 400.0
+
+[node name="camray" type="RayCast3D" parent="cameraviewport/viewport/camera"]
+target_position = Vector3(0, 0, -7)
+collide_with_areas = true
+collide_with_bodies = false
+debug_shape_thickness = 1
+
+[node name="holdtarget" type="Node3D" parent="cameraviewport/viewport/camera/camray"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="wield" type="Node3D" parent="cameraviewport/viewport/camera"]
+transform = Transform3D(0.98321, 0.0533203, -0.174512, -0.0151391, 0.976894, 0.213186, 0.181847, -0.206965, 0.9613, 0.556186, -0.511544, -0.745418)
+
+[node name="weapon" parent="cameraviewport/viewport/camera/wield" instance=ExtResource("2_g2els")]
+
+[node name="cameratar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+
+[node name="player" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player"]
+shape = SubResource("CapsuleShape3D_g2els")

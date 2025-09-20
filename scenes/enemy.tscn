@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://bya805d6yxsq0"]
+
+[ext_resource type="Texture2D" uid="uid://cf723isnfwjsd" path="res://icon.svg" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://bvpyomcujl18f" path="res://scripts/enemy.gd" id="1_md0e3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_md0e3"]
+albedo_texture = ExtResource("1_7p1mj")
+uv1_scale = Vector3(2.99, 1.995, 2.99)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ra3w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7p1mj"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 0.447059)
+uv1_scale = Vector3(2.99, 1.995, 2.99)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7p1mj"]
+
+[node name="dummy" type="CharacterBody3D"]
+script = ExtResource("1_md0e3")
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.827513, 0, 0, 0, 0.827513, 0, 0, 0, 0.827513, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_md0e3")
+mesh = SubResource("BoxMesh_4ra3w")
+
+[node name="hit" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.85804, 0, 0, 0, 0.85804, 0, 0, 0, 0.85804, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_7p1mj")
+mesh = SubResource("BoxMesh_4ra3w")
+
+[node name="coll" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.827513, 0, 0, 0, 0.827513, 0, 0, 0, 0.827513, 0, 0, 0)
+shape = SubResource("BoxShape3D_7p1mj")
+
+[node name="enemy" type="Area3D" parent="."]
+transform = Transform3D(1.07598, 0, 0, 0, 1.07598, 0, 0, 0, 1.07598, 0, 0, 0)
+collision_layer = 3
+collision_mask = 3
+
+[node name="coll" type="CollisionShape3D" parent="enemy"]
+transform = Transform3D(0.827513, 0, 0, 0, 0.827513, 0, 0, 0, 0.827513, 0, 0, 0)
+shape = SubResource("BoxShape3D_7p1mj")

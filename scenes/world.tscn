@@ -1,0 +1,425 @@
+[gd_scene load_steps=27 format=3 uid="uid://mdx8pet3dbsg"]
+
+[ext_resource type="PackedScene" uid="uid://dy4bo3or4ynv" path="res://scenes/player.tscn" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://cjryc4l288s0t" path="res://scripts/foodcontainer.gd" id="3_qfnet"]
+[ext_resource type="FontVariation" uid="uid://d1j2vg0idr4gg" path="res://font/descfont.tres" id="5_4mrxx"]
+[ext_resource type="Script" uid="uid://cf5iysejcennk" path="res://scripts/crosshair.gd" id="5_71j4m"]
+[ext_resource type="Script" uid="uid://drnnk8a6cknus" path="res://scripts/description.gd" id="5_qfnet"]
+[ext_resource type="PackedScene" uid="uid://svnf5bxoysdo" path="res://scenes/food/bread.tscn" id="7_4mrxx"]
+[ext_resource type="PackedScene" uid="uid://dgicstpatli56" path="res://scenes/ui/desctag.tscn" id="7_q5onr"]
+[ext_resource type="PackedScene" uid="uid://c3xdiadgqb0vu" path="res://scenes/food/john.tscn" id="9_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://chn64u1a7du3i" path="res://scenes/ui/hpbar.tscn" id="9_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://bya805d6yxsq0" path="res://scenes/enemy.tscn" id="10_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://bykust06hrvhm" path="res://scenes/food/water.tscn" id="12_jhx03"]
+[ext_resource type="Script" uid="uid://ch0na3qacbm5a" path="res://scripts/mapgen.gd" id="12_q5onr"]
+[ext_resource type="PackedScene" uid="uid://cpbebyr1751ug" path="res://scenes/food/bottledwater.tscn" id="13_jhx03"]
+[ext_resource type="PackedScene" uid="uid://dggw0xtnul7do" path="res://scenes/food/potatoe.tscn" id="14_o8fc1"]
+[ext_resource type="PackedScene" uid="uid://brjwm3hyyfqtb" path="res://scenes/food/pumpkin.tscn" id="15_xo05s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3hyu"]
+albedo_color = Color(0.323495, 0.163479, 0.0957959, 1)
+
+[sub_resource type="Environment" id="Environment_nnsk1"]
+background_mode = 1
+background_color = Color(0.140201, 0.106386, 0.0885412, 1)
+background_energy_multiplier = 1.05
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.5
+
+[sub_resource type="Animation" id="Animation_qfnet"]
+resource_name = "RESET"
+length = 0.001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("container:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-27, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("container:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.75, 0.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("container:columns")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1024]
+}
+
+[sub_resource type="Animation" id="Animation_e3hyu"]
+resource_name = "hide"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("container:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1.7411, 0.482968),
+"update": 0,
+"values": [Vector2(89, 192), Vector2(-27, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("container:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1.7411, 0.482968),
+"update": 0,
+"values": [Vector2(1.15, 1.15), Vector2(0.75, 0.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("container:columns")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1.7411, 1.7411),
+"update": 1,
+"values": [9, 1024]
+}
+
+[sub_resource type="Animation" id="Animation_w7kh3"]
+resource_name = "show"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("container:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.482968, 1),
+"update": 0,
+"values": [Vector2(-27, 5), Vector2(89, 192)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("container:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.482968, 1),
+"update": 0,
+"values": [Vector2(0.75, 0.75), Vector2(1.15, 1.15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("container:columns")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(0.482968, 0.482968),
+"update": 1,
+"values": [1024, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q5onr"]
+_data = {
+&"RESET": SubResource("Animation_qfnet"),
+&"hide": SubResource("Animation_e3hyu"),
+&"show": SubResource("Animation_w7kh3")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0juu"]
+bg_color = Color(0, 0, 0, 0.439216)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 4
+shadow_color = Color(0, 0, 0, 0)
+shadow_size = 1
+shadow_offset = Vector2(1, 1)
+anti_aliasing_size = 0.645
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71j4m"]
+bg_color = Color(0.79, 0.79, 0.79, 0.552941)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w7kh3"]
+bg_color = Color(1, 0.361893, 0.361893, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_w7kh3"]
+variation_embolden = 0.05
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7r4gi"]
+bg_color = Color(1, 0.29, 0.29, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.690082, 0.145354, 0.145354, 1)
+corner_radius_top_left = 48
+corner_radius_top_right = 48
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 48
+corner_detail = 4
+shadow_color = Color(0, 0, 0, 0.223529)
+shadow_offset = Vector2(1, 1)
+anti_aliasing = false
+
+[node name="World" type="Node3D"]
+
+[node name="player" parent="." instance=ExtResource("1_nnsk1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0372515, 0, 0.0477331)
+hp = 3
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0074, -0.751836, 14.9399)
+material_override = SubResource("StandardMaterial3D_e3hyu")
+use_collision = true
+size = Vector3(73.0851, 0.135, 76.6424)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nnsk1")
+
+[node name="ui" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="foodcontainer" type="Node2D" parent="ui"]
+z_index = 5
+position = Vector2(97, 2)
+script = ExtResource("3_qfnet")
+
+[node name="container" type="GridContainer" parent="ui/foodcontainer"]
+layout_direction = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = 5.0
+offset_right = 785.0
+offset_bottom = 177.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(406, 42)
+columns = 1024
+
+[node name="anim" type="AnimationPlayer" parent="ui/foodcontainer"]
+libraries = {
+&"": SubResource("AnimationLibrary_q5onr")
+}
+
+[node name="description" type="Node2D" parent="ui" groups=["descriptionman"]]
+z_index = 6
+z_as_relative = false
+position = Vector2(198, 12)
+scale = Vector2(0.85, 0.85)
+script = ExtResource("5_qfnet")
+
+[node name="bg" type="Panel" parent="ui/description"]
+offset_right = 252.0
+offset_bottom = 276.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k0juu")
+
+[node name="text" type="RichTextLabel" parent="ui/description"]
+offset_left = 1.0
+offset_right = 256.0
+offset_bottom = 325.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.537255)
+theme_override_fonts/normal_font = ExtResource("5_4mrxx")
+bbcode_enabled = true
+text = "[center][font_size=32px][color=#404040]Pepperoni[/color][/font_size]
+
+
+[center][bgcolor=#5050DF99]Passive Effect:[/bgcolor] 
+You gain so much money
+
+[bgcolor=#DF505099]Active Effect:[/bgcolor] 
+You die[/center]
+
+Bread is so damn tasty man I can't stop eating it"
+
+[node name="foodobj" parent="ui/description/text" instance=ExtResource("7_4mrxx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0490875, -0.239067, 0.666619)
+
+[node name="tags" type="GridContainer" parent="ui/description/text"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 41.0
+offset_right = 251.0
+offset_bottom = 111.0
+pivot_offset = Vector2(0.56, 0)
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 0
+
+[node name="tag" parent="ui/description/text/tags" instance=ExtResource("7_q5onr")]
+layout_mode = 2
+
+[node name="crosshair" type="Node2D" parent="ui"]
+z_index = 5
+scale = Vector2(0.65, 0.65)
+script = ExtResource("5_71j4m")
+metadata/_edit_group_ = true
+
+[node name="icon" type="Panel" parent="ui/crosshair"]
+offset_left = -1.0
+offset_top = -8.0
+offset_right = 1.0
+offset_bottom = 8.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_71j4m")
+
+[node name="icon2" type="Panel" parent="ui/crosshair"]
+offset_left = 8.0
+offset_top = -1.0
+offset_right = 10.0
+offset_bottom = 15.0
+rotation = 1.5708
+theme_override_styles/panel = SubResource("StyleBoxFlat_71j4m")
+
+[node name="hp" type="Control" parent="ui"]
+anchors_preset = 0
+offset_left = 19.0
+offset_top = 9.0
+offset_right = 59.0
+offset_bottom = 49.0
+
+[node name="bg2" type="Polygon2D" parent="ui/hp"]
+clip_children = 1
+polygon = PackedVector2Array(13, 12, 23, 6, 35, 3, 47, 6, 58, 13, 64, 23, 66, 35, 64, 47, 57, 57, 48, 64, 35, 67, 23, 64, 12, 57, 6, 47, 3, 35, 6, 22)
+
+[node name="container" type="VBoxContainer" parent="ui/hp/bg2"]
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 67.0
+offset_bottom = 65.0
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="hpbar5" parent="ui/hp/bg2/container" instance=ExtResource("9_w7kh3")]
+layout_mode = 2
+
+[node name="hpbar6" type="Panel" parent="ui/hp/bg2/container"]
+show_behind_parent = true
+clip_contents = true
+custom_minimum_size = Vector2(0, 13)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w7kh3")
+
+[node name="hpbar2" type="Panel" parent="ui/hp/bg2/container"]
+show_behind_parent = true
+clip_contents = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w7kh3")
+
+[node name="hpbar3" type="Panel" parent="ui/hp/bg2/container"]
+show_behind_parent = true
+clip_contents = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w7kh3")
+
+[node name="hpbar4" type="Panel" parent="ui/hp/bg2/container"]
+show_behind_parent = true
+clip_contents = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w7kh3")
+
+[node name="hp" type="Label" parent="ui/hp"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 67.0
+offset_bottom = 70.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = SubResource("FontVariation_w7kh3")
+theme_override_font_sizes/font_size = 48
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="bg" type="Panel" parent="ui/hp"]
+clip_contents = true
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 67.0
+offset_bottom = 67.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7r4gi")
+
+[node name="foodobj" parent="." instance=ExtResource("9_7r4gi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.838176, -0.550456, -0.356176)
+
+[node name="enemy" parent="." instance=ExtResource("10_w7kh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41479, -0.27058, -2.20718)
+
+[node name="map" type="Node3D" parent="."]
+transform = Transform3D(0.046, 0, 0, 0, 0.03, 0, 0, 0, 0.046, 0, 0, 0)
+script = ExtResource("12_q5onr")
+
+[node name="sprite" type="Sprite3D" parent="map"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 5.49, 5, 0.651)
+billboard = 1
+
+[node name="OmniLight3D" type="OmniLight3D" parent="map"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 10.6058, 232.172, 9.75889)
+light_color = Color(1, 0.806618, 0.269822, 1)
+light_energy = 7.552
+omni_range = 2163.11
+
+[node name="foodobj2" parent="." instance=ExtResource("12_jhx03")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.661322, -0.464836, -0.631068)
+
+[node name="foodobj3" parent="." instance=ExtResource("13_jhx03")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.211889, -0.372777, -0.877973)
+
+[node name="foodobj4" parent="." instance=ExtResource("14_o8fc1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48961, -0.48286, -1.4065)
+
+[node name="foodobj5" parent="." instance=ExtResource("15_xo05s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35098, -0.349488, 0.572285)

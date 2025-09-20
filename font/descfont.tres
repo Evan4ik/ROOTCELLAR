@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://d1j2vg0idr4gg"]
+
+[ext_resource type="FontFile" uid="uid://bwbysf3btwsx8" path="res://font/JMH Typewriter.otf" id="1_bmmqn"]
+
+[resource]
+base_font = ExtResource("1_bmmqn")

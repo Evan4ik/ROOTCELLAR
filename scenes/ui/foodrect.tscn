@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://btt7mhmtc0kxh"]
+
+[ext_resource type="Script" uid="uid://bnype1wvinuka" path="res://scripts/foodcard.gd" id="1_fcxod"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8rhpb"]
+viewport_path = NodePath("render")
+
+[sub_resource type="Environment" id="Environment_8pe00"]
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="World3D" id="World3D_w0wle"]
+environment = SubResource("Environment_8pe00")
+
+[node name="food" type="ColorRect"]
+custom_minimum_size = Vector2(64, 84)
+offset_right = 40.0
+offset_bottom = 56.0
+color = Color(0.981171, 0.890301, 0.813525, 1)
+script = ExtResource("1_fcxod")
+
+[node name="bg" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(15, 5)
+layout_mode = 2
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 62.0
+offset_bottom = 82.0
+mouse_filter = 1
+
+[node name="shadow" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 1)
+position = Vector2(32, 42)
+scale = Vector2(1.04, 1.04)
+texture = SubResource("ViewportTexture_8rhpb")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(32, 42)
+texture = SubResource("ViewportTexture_8rhpb")
+
+[node name="render" type="SubViewport" parent="."]
+own_world_3d = true
+world_3d = SubResource("World3D_w0wle")
+transparent_bg = true
+size = Vector2i(64, 64)
+
+[node name="camera" type="Camera3D" parent="render"]
+doppler_tracking = 2
+projection = 1
+size = 0.64
+
+[node name="light" type="OmniLight3D" parent="render/camera"]

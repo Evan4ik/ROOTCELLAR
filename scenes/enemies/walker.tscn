@@ -1,0 +1,300 @@
+[gd_scene load_steps=16 format=3 uid="uid://0oa06mv5qa07"]
+
+[ext_resource type="Script" uid="uid://cp5vrfse1ihvh" path="res://scripts/enemies/walker.gd" id="1_2jm2j"]
+[ext_resource type="Texture2D" uid="uid://cf723isnfwjsd" path="res://icon.svg" id="2_67ber"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7p1mj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2jm2j"]
+size = Vector3(0.761658, 0.850586, 0.143311)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_67ber"]
+size = Vector3(1.05078, 1.35248, 1.03552)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2jm2j"]
+radius = 3.34157
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_67ber"]
+radius = 0.697291
+
+[sub_resource type="Animation" id="Animation_67ber"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mesh/leg:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mesh/leg:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.287057, -0.62655, -0.033151)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("mesh/leg2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.267162, -0.62655, -0.033151)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("mesh/leg2:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("mesh:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("mesh:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_apytk"]
+resource_name = "die"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.50098, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.466667),
+"transitions": PackedFloat32Array(0.482968, 3.36358, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.186, 0), Vector3(0, -0.405, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2jm2j"]
+resource_name = "spot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.433333, 0.966667),
+"transitions": PackedFloat32Array(0.5, 2.21914, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.46, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v1rg7"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mesh/leg:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.2, 0.533333, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.02102, 0, 0), Vector3(0, 0, 0), Vector3(-0.628319, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mesh/leg:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.533333, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.287057, -0.62655, -0.033151), Vector3(-0.287, -0.507, -0.143), Vector3(-0.287057, -0.62655, -0.033151), Vector3(-0.287, -0.597, 0.007)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("mesh/leg2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333, 0.3, 0.533333, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.267162, -0.62655, -0.033151), Vector3(0.267, -0.582, 0.062), Vector3(0.267162, -0.62655, -0.033151), Vector3(0.267, -0.582, -0.093)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("mesh/leg2:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0333333, 0.3, 0.533333, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.863938, 0, 0), Vector3(0, 0, 0), Vector3(0.863938, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v1rg7"]
+_data = {
+&"RESET": SubResource("Animation_67ber"),
+&"die": SubResource("Animation_apytk"),
+&"spot": SubResource("Animation_2jm2j"),
+&"walk": SubResource("Animation_v1rg7")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_md0e3"]
+albedo_texture = ExtResource("2_67ber")
+uv1_scale = Vector3(2.99, 1.995, 2.99)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ra3w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7p1mj"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 0.447059)
+uv1_scale = Vector3(2.99, 1.995, 2.99)
+
+[node name="walker" type="CharacterBody3D"]
+script = ExtResource("1_2jm2j")
+maxDistance = 15.0
+hp = 10.0
+hitPath = "mesh/head/hit"
+
+[node name="coll" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.827513, 0, 0, 0, 0.827513, 0, 0, 0, 0.827513, 0, 0.0108537, 0)
+shape = SubResource("BoxShape3D_7p1mj")
+
+[node name="coll2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.827513, 0, 0, 0, 0.827513, 0, 0, 0, 0.827513, -0.00896506, -0.350701, -0.034042)
+shape = SubResource("BoxShape3D_2jm2j")
+
+[node name="enemy" type="Area3D" parent="."]
+transform = Transform3D(1.07598, 0, 0, 0, 1.07598, 0, 0, 0, 1.07598, 0, -0.207306, 0)
+collision_layer = 3
+collision_mask = 3
+
+[node name="coll" type="CollisionShape3D" parent="enemy"]
+transform = Transform3D(0.827513, 0, 0, 0, 0.827513, 0, 0, 0, 0.827513, -0.0074047, 0.0776691, -0.000656596)
+shape = SubResource("BoxShape3D_67ber")
+
+[node name="vision" type="Area3D" parent="."]
+transform = Transform3D(1.07598, 0, 0, 0, 1.07598, 0, 0, 0, 1.07598, 0, -0.207306, 0)
+collision_layer = 3
+collision_mask = 3
+
+[node name="coll" type="CollisionShape3D" parent="vision"]
+transform = Transform3D(0.827513, 0, 0, 0, 0.827513, 0, 0, 0, 0.827513, -0.0074047, 0.31198, 2.6175)
+shape = SubResource("SphereShape3D_2jm2j")
+
+[node name="phit" type="Area3D" parent="."]
+transform = Transform3D(1.07598, 0, 0, 0, 1.07598, 0, 0, 0, 1.07598, 0, -0.0522138, 0.580242)
+collision_layer = 3
+collision_mask = 3
+
+[node name="coll" type="CollisionShape3D" parent="phit"]
+transform = Transform3D(0.827513, 0, 0, 0, 0.827513, 0, 0, 0, 0.827513, 0, 0, 0)
+shape = SubResource("SphereShape3D_67ber")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_v1rg7")
+}
+
+[node name="viewray" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.342041)
+target_position = Vector3(0, 0, 1)
+
+[node name="mesh" type="Node3D" parent="."]
+
+[node name="leg" type="MeshInstance3D" parent="mesh"]
+transform = Transform3D(0.105204, 0, 0, 0, 0.361372, 0, 0, 0, 0.105204, -0.287057, -0.62655, -0.033151)
+material_override = SubResource("StandardMaterial3D_md0e3")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../..")
+
+[node name="mesh5" type="MeshInstance3D" parent="mesh/leg"]
+transform = Transform3D(1.03685, 0, 0, 0, 0.295669, 0, 0, 0, 1.92991, 0.0447104, -0.344939, 0.693025)
+material_override = SubResource("StandardMaterial3D_md0e3")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../../..")
+
+[node name="leg2" type="MeshInstance3D" parent="mesh"]
+transform = Transform3D(0.105204, 0, 0, 0, 0.361372, 0, 0, 0, 0.105204, 0.267162, -0.62655, -0.033151)
+material_override = SubResource("StandardMaterial3D_md0e3")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../..")
+
+[node name="mesh4" type="MeshInstance3D" parent="mesh/leg2"]
+transform = Transform3D(1.03685, 0, 0, 0, 0.295669, 0, 0, 0, 1.92991, -4.76837e-07, -0.344939, 0.693025)
+material_override = SubResource("StandardMaterial3D_md0e3")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../../..")
+
+[node name="head" type="MeshInstance3D" parent="mesh"]
+transform = Transform3D(0.827513, 0, 0, 0, 0.827513, 0, 0, 0, 0.827513, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_md0e3")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../..")
+
+[node name="hit" type="MeshInstance3D" parent="mesh/head"]
+transform = Transform3D(1.03689, 0, 0, 0, 1.03689, 0, 0, 0, 1.03689, 0, -0.00978538, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_7p1mj")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../../..")
+
+[node name="target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)

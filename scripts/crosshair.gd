@@ -1,0 +1,3 @@
+extends Node2D
+
+func _process(delta: float) -> void: get_viewport_rect().size / 2
