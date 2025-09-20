@@ -27,6 +27,13 @@ func get_input(delta:float) -> void:
 	if Input.is_action_pressed("down"): velocity += basis.z * speed * delta
 	if Input.is_action_pressed("left"): velocity -= basis.x * speed * delta
 	if Input.is_action_pressed("right"): velocity += basis.x * speed * delta
+	
+	if Input.is_action_pressed("ui_up"): $cameratar.rotation_degrees.x = clamp($cameratar.rotation_degrees.x + 1.5, -75, 75)
+	if Input.is_action_pressed("ui_down"): $cameratar.rotation_degrees.x = clamp($cameratar.rotation_degrees.x - 1.5, -75, 75)
+	if Input.is_action_pressed("ui_left"): self.rotation_degrees.y += 2.15
+	if Input.is_action_pressed("ui_right"): self.rotation_degrees.y -= 2.15 
+
+
 	var hasInput = abs(velocity.x) > 1.1 or abs(velocity.z) > 1.1
 	if (hasInput):
 		camBob += 0.1
