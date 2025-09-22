@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://mdx8pet3dbsg"]
+[gd_scene load_steps=29 format=3 uid="uid://mdx8pet3dbsg"]
 
 [ext_resource type="PackedScene" uid="uid://dy4bo3or4ynv" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://cjryc4l288s0t" path="res://scripts/foodcontainer.gd" id="3_qfnet"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cpbebyr1751ug" path="res://scenes/food/bottledwater.tscn" id="13_jhx03"]
 [ext_resource type="PackedScene" uid="uid://dggw0xtnul7do" path="res://scenes/food/potatoe.tscn" id="14_o8fc1"]
 [ext_resource type="PackedScene" uid="uid://brjwm3hyyfqtb" path="res://scenes/food/pumpkin.tscn" id="15_xo05s"]
+[ext_resource type="PackedScene" uid="uid://bxx3x5pagmgq8" path="res://scenes/exit.tscn" id="16_dss4m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3hyu"]
 albedo_color = Color(0.323495, 0.163479, 0.0957959, 1)
@@ -202,6 +203,9 @@ shadow_color = Color(0, 0, 0, 0.223529)
 shadow_offset = Vector2(1, 1)
 anti_aliasing = false
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_dss4m"]
+viewport_path = NodePath("ui/map/viewport")
+
 [node name="World" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("1_nnsk1")]
@@ -209,10 +213,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0372515, 0, 0.0477331)
 hp = 3
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0074, -0.751836, 14.9399)
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 0.05299759, -0.751836, 0.15437031)
 material_override = SubResource("StandardMaterial3D_e3hyu")
 use_collision = true
-size = Vector3(73.0851, 0.135, 76.6424)
+size = Vector3(150, 0.135, 150)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_nnsk1")
@@ -392,34 +396,52 @@ offset_right = 67.0
 offset_bottom = 67.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_7r4gi")
 
-[node name="foodobj" parent="." instance=ExtResource("9_7r4gi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.838176, -0.550456, -0.356176)
+[node name="map" type="Sprite2D" parent="ui"]
+position = Vector2(876, 83)
+scale = Vector2(0.295, 0.295)
+texture = SubResource("ViewportTexture_dss4m")
+
+[node name="viewport" type="SubViewport" parent="ui/map"]
+transparent_bg = true
+
+[node name="mapcam" type="Camera3D" parent="ui/map/viewport"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 10.975813, 0)
+cull_mask = 512
+projection = 1
+size = 62.875
 
 [node name="enemy" parent="." instance=ExtResource("10_w7kh3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41479, -0.27058, -2.20718)
 
 [node name="map" type="Node3D" parent="."]
-transform = Transform3D(0.046, 0, 0, 0, 0.03, 0, 0, 0, 0.046, 0, 0, 0)
 script = ExtResource("12_q5onr")
 
-[node name="sprite" type="Sprite3D" parent="map"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 5.49, 5, 0.651)
-billboard = 1
+[node name="foodobj" parent="map" instance=ExtResource("9_7r4gi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.838176, -0.550456, -0.356176)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="map"]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 10.6058, 232.172, 9.75889)
+[node name="foodobj2" parent="map" instance=ExtResource("12_jhx03")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.661322, -0.464836, -0.631068)
+
+[node name="foodobj3" parent="map" instance=ExtResource("13_jhx03")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.211889, -0.372777, -0.877973)
+
+[node name="foodobj4" parent="map" instance=ExtResource("14_o8fc1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48961, -0.48286, -1.4065)
+
+[node name="foodobj5" parent="map" instance=ExtResource("15_xo05s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35098, -0.349488, 0.572285)
+
+[node name="exit" parent="map" instance=ExtResource("16_dss4m")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4878668, 6.96516, 0.44890895)
 light_color = Color(1, 0.806618, 0.269822, 1)
 light_energy = 7.552
 omni_range = 2163.11
 
-[node name="foodobj2" parent="." instance=ExtResource("12_jhx03")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.661322, -0.464836, -0.631068)
-
-[node name="foodobj3" parent="." instance=ExtResource("13_jhx03")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.211889, -0.372777, -0.877973)
-
-[node name="foodobj4" parent="." instance=ExtResource("14_o8fc1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48961, -0.48286, -1.4065)
-
-[node name="foodobj5" parent="." instance=ExtResource("15_xo05s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35098, -0.349488, 0.572285)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.6388431, -0.33042628, 0.694765, -0.073269315, 0.87283367, 0.48248658, -0.7658403, -0.35913807, 0.5333935, 0.075474024, 1.2778219, 0.022261381)
+light_color = Color(1, 0.79485667, 0.62495375, 1)
+light_energy = 0.625
+light_volumetric_fog_energy = 4.213
+sky_mode = 1

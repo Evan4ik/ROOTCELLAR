@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxx3x5pagmgq8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_38eme"]
+albedo_color = Color(0.49321133, 0.283146, 0.15254092, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l0aq0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uyw7u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_38eme"]
+size = Vector3(1, 0.22988892, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l0aq0"]
+shading_mode = 0
+albedo_color = Color(0, 0.44960213, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_uyw7u"]
+
+[node name="exit" type="Node3D"]
+
+[node name="exit" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.06426054, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_38eme")
+mesh = SubResource("BoxMesh_l0aq0")
+
+[node name="exit2" type="MeshInstance3D" parent="exit"]
+transform = Transform3D(1.032, 0, 0, 0, 0.453, 0, 0, 0, 1.032, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_uyw7u")
+mesh = SubResource("BoxMesh_l0aq0")
+skeleton = NodePath("../..")
+
+[node name="exitarea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="exitarea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035995483, 0)
+shape = SubResource("BoxShape3D_38eme")
+
+[node name="mapmarker" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.0578482, 0, 0, 0, 1.0578482, 0, 0, 0, 1.0578482, 0, 12.320752, 0)
+layers = 512
+material_override = SubResource("StandardMaterial3D_l0aq0")
+mesh = SubResource("SphereMesh_uyw7u")

@@ -1,6 +1,7 @@
 extends Node
 
 var brick = preload("res://scenes/brick.tscn")
+var exitInst = preload("res://scenes/exit.tscn")
 
 var noise:FastNoiseLite = FastNoiseLite.new()
 var r:RandomNumberGenerator = RandomNumberGenerator.new()
@@ -8,17 +9,11 @@ var r:RandomNumberGenerator = RandomNumberGenerator.new()
 func _ready() -> void:
 	r.randomize()
 
-func _process(delta: float) -> void:
-	if (Input.is_action_just_pressed("grab")):
-		generate()
-	if (Input.is_action_just_pressed("click")):
-		destroy()
-
 func generate() ->void:
 	destroy()
 	
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
-	noise.frequency = 0.075
+	noise.frequency = 0.115
 	noise.fractal_type = FastNoiseLite.FRACTAL_FBM
 	noise.fractal_octaves = 5.0
 	
@@ -27,18 +22,15 @@ func generate() ->void:
 	if (size[0] > 150): size[0] = 150
 	if(size[1] > 150): size[1] = 150
 	
-	var cutOff:float = 0.075
+	var cutOff:float = 0.05
 	
 	noise.seed = r.randf_range(-99900.0, 99900.0)
 	
 	var image = noise.get_image(size[0], size[1])
 	var noise_texture = ImageTexture.create_from_image(image)
 	
-	$sprite.texture = noise_texture
-	
 	var map:Array = []
 	var spawnRegion:Array = [[int(round(size[1] / 2.0) - 1), int(round(size[1] / 2.0)), int(round(size[1] / 2.0) + 1)],  [int(round(size[0] / 2.0) - 1), int(round(size[0] / 2.0)), int(round(size[0] / 2.0) + 1)]]
-	
 	
 	"""map = [
 		[1,0,0,0,0,0,0,0],
@@ -49,6 +41,7 @@ func generate() ->void:
 	size = [8, 4]"""
 	
 	var groups = []
+	var excludeTiles = [spawnRegion.duplicate()]
 	
 	for y in range(size[1]):  #generate map and groups
 		map.append([])
@@ -58,7 +51,10 @@ func generate() ->void:
 			var almostEdge = ((y == 1 or y == size[1] - 2) or (x == 1 or x == size[0] - 2)) and r.randi_range(0, 100) > 70
 			var ceilingTile =  (height < cutOff) and !edge and !almostEdge 
 			
-			if (spawnRegion[0].has(y) and spawnRegion[1].has(x)): ceilingTile = true
+			for eTile in excludeTiles:
+				if !(eTile[0].has(y) and eTile[1].has(x)): continue
+				ceilingTile = true
+				break
 			
 			map[y].append(0 if (ceilingTile) else 1)
 			if (!ceilingTile) or (x <= 1 or x >= size[0] - 2) or (y <= 1 or y >= size[1] - 2): continue
@@ -84,7 +80,7 @@ func generate() ->void:
 				groups.append([])
 				groups[idx].append(tile)
 				await get_tree().create_timer(0.01).timeout
-			var neighbours = getNeighbours(tile, [size[0], size[1]], noise, cutOff, groups[idx], spawnRegion)
+			var neighbours = getNeighbours(tile, [size[0], size[1]], noise, cutOff, groups[idx], excludeTiles)
 			groups[idx].append_array(neighbours)
 			
 	#merge groups with duplicate elements
@@ -122,7 +118,7 @@ func generate() ->void:
 		i = 1
 		while(i < groups.size()):
 			var connectTo = groups[i]
-			if (connectTo.size() < 2):
+			if (connectTo.size() < 1):
 				i += 1 
 				continue
 			
@@ -147,9 +143,28 @@ func generate() ->void:
 					connectedGroups.append(hitsA[h][1])
 				j += 1
 			i += 1
-		
+	
+	var startIndex = 0 if (groups.size() < 2) else 1
+	var gEx = groups[r.randi_range(startIndex, groups.size() - 1)]
+	var exit = gEx[r.randi_range(0, gEx.size() - 1)]
+	print(exit)
+	
+	
 	for y in range(size[1]):
 		for x in range(size[0]):
+			
+			if (y == round(size[1] / 2) and x == round(size[0] / 2)): 
+				get_node("../player").position = Vector3(x, 2.0, y)
+				get_node("../ui/map/viewport/mapcam").global_transform.origin = get_node("../player").position + (Vector3.UP * 15.0)
+			
+			if (exit[0] == x and exit[1] == y):
+				var eInst = exitInst.instantiate()
+				self.add_child(eInst)
+				
+				eInst.position = Vector3(x, -0.68, y)
+				continue
+			
+			
 			if (map[y][x] == 0): continue
 			
 			var inst = brick.instantiate()
@@ -163,9 +178,9 @@ func generate() ->void:
 			
 			#await get_tree().create_timer(0.01).timeout
 	
-func destroy() ->void: for child in self.get_children(): if (child is CSGBox3D): child.queue_free()
+func destroy() ->void: for child in self.get_children(): child.queue_free()
 
-func getNeighbours(tile:Array , map:Array, noiseMap, cutOff:float, allNeighbours:Array, spawnRegion:Array) -> Array:
+func getNeighbours(tile:Array , map:Array, noiseMap, cutOff:float, allNeighbours:Array, excludeTiles:Array) -> Array:
 	
 	tile = tile.duplicate()
 	var neighbours:Array = [].duplicate()
@@ -173,12 +188,21 @@ func getNeighbours(tile:Array , map:Array, noiseMap, cutOff:float, allNeighbours
 	var y = tile[1]
 	
 	
-	if (x > 1 and !allNeighbours.has([x -1, y]) and (noise.get_noise_2d(x - 1,y) < cutOff or (spawnRegion[0].has(y) and spawnRegion[1].has(x - 1)))) : neighbours.append([x -1, y])
-	if (x < map[0] - 1 and !allNeighbours.has([x + 1, y]) and (noise.get_noise_2d(x + 1,y) < cutOff or (spawnRegion[0].has(y) and spawnRegion[1].has(x + 1))) ): neighbours.append([x + 1, y])
-	if (y > 1 and !allNeighbours.has([x, y - 1]) and (noise.get_noise_2d(x,y - 1) < cutOff or (spawnRegion[0].has(y - 1) and spawnRegion[1].has(x))) ): neighbours.append([x, y - 1])
-	if (y < map[1] - 1 and !allNeighbours.has([x, y + 1]) and (noise.get_noise_2d(x,y + 1) < cutOff or (spawnRegion[0].has(y + 1) and spawnRegion[1].has(x))) ): neighbours.append([x, y + 1])
+	if (x > 1 and !allNeighbours.has([x -1, y]) and (noise.get_noise_2d(x - 1,y) < cutOff or excludeTileCheck([x -1, y], excludeTiles)) )  : neighbours.append([x -1, y])
+	if (x < map[0] - 1 and !allNeighbours.has([x + 1, y]) and (noise.get_noise_2d(x + 1,y) < cutOff or excludeTileCheck([x +1, y], excludeTiles)) ): neighbours.append([x + 1, y])
+	if (y > 1 and !allNeighbours.has([x, y - 1]) and (noise.get_noise_2d(x,y - 1) < cutOff or excludeTileCheck([x, y - 1], excludeTiles)) ): neighbours.append([x, y - 1])
+	if (y < map[1] - 1 and !allNeighbours.has([x, y + 1]) and (noise.get_noise_2d(x,y + 1) < cutOff or excludeTileCheck([x, y + 1], excludeTiles)) ): neighbours.append([x, y + 1])
 	
 	return neighbours
+
+func excludeTileCheck(tile:Array, excludeTiles:Array):
+	var x = tile[0]
+	var y= tile[1]
+	
+	for eTile in excludeTiles:
+		if !(eTile[0].has(y) and eTile[1].has(x)): continue
+		return true
+	return false
 
 func boreInDirection(tile:Array, map:Array, group:Array, direction:int, mult:int = 1, allGroups:Array = []) -> Array:
 	var tTile = tile.duplicate(true)

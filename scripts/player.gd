@@ -27,6 +27,7 @@ func get_input(delta:float) -> void:
 	if Input.is_action_pressed("down"): velocity += basis.z * speed * delta
 	if Input.is_action_pressed("left"): velocity -= basis.x * speed * delta
 	if Input.is_action_pressed("right"): velocity += basis.x * speed * delta
+	velocity.y -= 1.0
 	
 	if Input.is_action_pressed("ui_up"): $cameratar.rotation_degrees.x = clamp($cameratar.rotation_degrees.x + 1.5, -75, 75)
 	if Input.is_action_pressed("ui_down"): $cameratar.rotation_degrees.x = clamp($cameratar.rotation_degrees.x - 1.5, -75, 75)
@@ -159,7 +160,9 @@ func ray():
 			var target = camray.get_collision_point()
 			doHold(collider.get_parent())
 		elif(!Input.is_action_pressed("grab")): description.showDesc(desc[0], desc[1])
-		
+	elif("exitarea" in collider.name):
+		if (Input.is_action_just_pressed("pickup")):
+			get_node("../map").generate()
 	elif(description.visible): unGrab()
 
 func unGrab(): description.hideDesc()

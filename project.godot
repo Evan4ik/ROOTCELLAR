@@ -97,6 +97,7 @@ pickup={
 
 [layer_names]
 
+3d_render/layer_10="dungeonmap"
 3d_physics/layer_1="main"
 3d_physics/layer_2="weapon/enemey"
 
