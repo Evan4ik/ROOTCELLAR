@@ -143,10 +143,23 @@ func generate() ->void:
 					connectedGroups.append(hitsA[h][1])
 				j += 1
 			i += 1
-	
-	var startIndex = 0 if (groups.size() < 2) else 1
-	var gEx = groups[r.randi_range(startIndex, groups.size() - 1)]
+	var startIndeces = []
+	for idx in groups: startIndeces.append(groups.find(idx))
+	var startIndex = startIndeces[r.randi_range(0, startIndeces.size() - 1)]
+	while(groups[startIndex].size() < 2):
+		startIndeces.erase(startIndex)
+		startIndex = startIndeces[r.randi_range(0, startIndeces.size() - 1)]
+	var gEx = groups[startIndex].duplicate()
 	var exit = gEx[r.randi_range(0, gEx.size() - 1)]
+	
+	while(exit[0] <= 2 or exit[0] >= size[0] - 2) or (exit[1] <= 2 or exit[1] >= size[1] - 2):
+		gEx.erase(exit)
+		if (gEx.size() < 1):
+			startIndeces.erase(startIndex)
+			startIndex = startIndeces[r.randi_range(0, startIndeces.size() - 1)]
+			gEx = groups[startIndex].duplicate()
+		exit = gEx[r.randi_range(0, gEx.size() - 1)]
+	
 	print(exit)
 	
 	
