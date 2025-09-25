@@ -1,0 +1,23 @@
+Failed to find vanilla text header.
+Failed to find vanilla languages header.
+Failed to find vanilla descriptors header.
+Failed to find vanilla materials header.
+Failed to find vanilla environment header.
+Failed to find vanilla plants header.
+Failed to find vanilla items header.
+Failed to find vanilla buildings header.
+Failed to find vanilla bodies header.
+Failed to find vanilla creatures header.
+Failed to find vanilla entities header.
+Failed to find vanilla reactions header.
+Failed to find vanilla interactions header.
+Failed to find vanilla descriptors graphics header.
+Failed to find vanilla plants graphics header.
+Failed to find vanilla items graphics header.
+Failed to find vanilla buildings graphics header.
+Failed to find vanilla creatures graphics header.
+Failed to find vanilla interactions graphics header.
+Failed to find vanilla world map header.
+Failed to find vanilla interface header.
+Failed to find vanilla music header.
+Failed to find vanilla procedural objects header.

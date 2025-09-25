@@ -6,7 +6,7 @@ func _process(delta: float) -> void:
 	set_process(false)
 
 func _active():
-	player.changeHp(activeAmt, 0)
+	player.changeHp(ceil(activeAmt), 0)
 
 func getDisplayNumbers():
 	var ret:Array = [ int(passiveAmt), int(activeAmt)]

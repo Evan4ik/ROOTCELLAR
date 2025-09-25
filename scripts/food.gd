@@ -8,10 +8,12 @@ enum foodCategories { FOOD_NONE, FOOD_BAKED, FOOD_NATURAL, FOOD_MEAT, FOOD_DAIRY
 @export_category("Params") 
 @export var foodName:String = ""
 @export_multiline var foodDescription:String = ""
+@export var descriptionMods:Dictionary[String, String] = {}
 @export var foodCategory = foodCategories.FOOD_NONE
 @export var rarity:int = 0
 @export_category("Effects") 
 
+@export var modifiers:PackedStringArray = []
 @export var passiveAmt:float = 1.0
 @export_multiline var passiveDesc:String = ""
 
@@ -27,7 +29,11 @@ enum foodCategories { FOOD_NONE, FOOD_BAKED, FOOD_NATURAL, FOOD_MEAT, FOOD_DAIRY
 
 var usedPassive:bool = false
 
-func _ready() -> void: set_process(false)
+func _ready() -> void: 
+	set_process(false)
+	if (get_node_or_null("mesh") == null): return
+	$mesh.visible = true
+	for child in $mesh.get_children(): child.visible = child.name == "default"
 
 func getDisplayNumbers():
 	var ret:Array = [ passiveAmt, activeAmt]

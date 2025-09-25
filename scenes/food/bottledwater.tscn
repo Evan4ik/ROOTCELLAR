@@ -2,8 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dqmhby3lal428" path="res://scripts/food/water.gd" id="1_s4ebk"]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6a7r1"]
+height = 0.114319
+radius = 0.0400391
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s4ebk"]
+radius = 0.0839307
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s4ebk"]
-transparency = 1
 albedo_color = Color(0.66, 0.790333, 1, 0.223529)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tfnnp"]
@@ -13,20 +19,10 @@ albedo_color = Color(0.421082, 0.501817, 1, 1)
 albedo_color = Color(0.421082, 0.501817, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dekt"]
-transparency = 3
-alpha_hash_scale = 0.97
-alpha_antialiasing_mode = 0
 albedo_color = Color(0.46, 0.748, 1, 1)
 refraction_enabled = true
 refraction_scale = -0.37
 refraction_texture_channel = 2
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_6a7r1"]
-height = 0.114319
-radius = 0.0400391
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_s4ebk"]
-radius = 0.0839307
 
 [node name="foodobj" type="RigidBody3D"]
 mass = 0.756
@@ -39,33 +35,6 @@ passiveDesc = "Restore %s HP every 60 seconds."
 activeAmt = 2.0
 activeDesc = "Restore %s HP."
 
-[node name="mesh" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.107906, 0)
-radius = 0.158203
-height = 0.407306
-material = SubResource("StandardMaterial3D_s4ebk")
-
-[node name="mesh2" type="CSGCylinder3D" parent="mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.267561, 0)
-material_override = SubResource("StandardMaterial3D_tfnnp")
-radius = 0.0791016
-height = 0.0952544
-material = SubResource("StandardMaterial3D_ij6u4")
-
-[node name="mesh" type="CSGSphere3D" parent="mesh"]
-transform = Transform3D(0.234879, 0, 0, 0, 0.195582, 0, 0, 0, 0.234879, 0, 0.170434, 0)
-material_override = SubResource("StandardMaterial3D_s4ebk")
-radius = 0.621657
-material = SubResource("StandardMaterial3D_s4ebk")
-
-[node name="water" type="CSGCylinder3D" parent="mesh"]
-transform = Transform3D(0.932218, 0, 0, 0, 0.932218, 0, 0, 0, 0.932218, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_6dekt")
-operation = 2
-radius = 0.158203
-height = 0.407306
-material = SubResource("StandardMaterial3D_6dekt")
-
 [node name="coll" type="CollisionShape3D" parent="."]
 transform = Transform3D(4.00023, 0, 0, 0, 4.00023, 0, 0, 0, 4.00023, 0, -0.0760542, 0)
 shape = SubResource("CylinderShape3D_6a7r1")
@@ -76,3 +45,34 @@ transform = Transform3D(1.16895, 0, 0, 0, 1.16895, 0, 0, 0, 1.16895, 0, 0, 0)
 [node name="coll" type="CollisionShape3D" parent="foodarea"]
 transform = Transform3D(4.00023, 0, 0, 0, -1.74856e-07, -4.00023, 0, 4.00023, -1.74856e-07, 0, 0, 0)
 shape = SubResource("SphereShape3D_s4ebk")
+
+[node name="mesh" type="Node3D" parent="."]
+
+[node name="default" type="CSGCylinder3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.107906, 0)
+flip_faces = true
+radius = 0.158203
+height = 0.407306
+material = SubResource("StandardMaterial3D_s4ebk")
+
+[node name="mesh2" type="CSGCylinder3D" parent="mesh/default"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.267561, 0)
+material_override = SubResource("StandardMaterial3D_tfnnp")
+radius = 0.0791016
+height = 0.0952544
+material = SubResource("StandardMaterial3D_ij6u4")
+
+[node name="mesh" type="CSGSphere3D" parent="mesh/default"]
+transform = Transform3D(0.234879, 0, 0, 0, 0.195582, 0, 0, 0, 0.234879, 0, 0.170434, 0)
+material_override = SubResource("StandardMaterial3D_s4ebk")
+flip_faces = true
+radius = 0.621657
+material = SubResource("StandardMaterial3D_s4ebk")
+
+[node name="water" type="CSGCylinder3D" parent="mesh/default"]
+transform = Transform3D(0.932218, 0, 0, 0, 0.932218, 0, 0, 0, 0.932218, 0, -0.0042615384, 0)
+material_override = SubResource("StandardMaterial3D_6dekt")
+operation = 2
+radius = 0.158203
+height = 0.407306
+material = SubResource("StandardMaterial3D_6dekt")

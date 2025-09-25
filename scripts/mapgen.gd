@@ -1,7 +1,7 @@
 extends Node
 
 var brick = preload("res://scenes/brick.tscn")
-var exitInst = preload("res://scenes/exit.tscn")
+var exitInst = preload("res://scenes/structures/exit.tscn")
 
 var noise:FastNoiseLite = FastNoiseLite.new()
 var r:RandomNumberGenerator = RandomNumberGenerator.new()
@@ -118,7 +118,7 @@ func generate() ->void:
 		i = 1
 		while(i < groups.size()):
 			var connectTo = groups[i]
-			if (connectTo.size() < 1):
+			if (connectTo.size() < 2):
 				i += 1 
 				continue
 			

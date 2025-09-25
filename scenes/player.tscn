@@ -1,9 +1,35 @@
-[gd_scene load_steps=7 format=3 uid="uid://dy4bo3or4ynv"]
+[gd_scene load_steps=11 format=3 uid="uid://dy4bo3or4ynv"]
 
 [ext_resource type="Script" uid="uid://rnsblggr621a" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://cp1ipvrhfab0l" path="res://scenes/weapons/weapon.tscn" id="2_g2els"]
+[ext_resource type="Shader" uid="uid://fohwokcht2qs" path="res://scripts/pixel.gdshader" id="3_qhqgy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqkch"]
+shader = ExtResource("3_qhqgy")
+shader_parameter/virtual_resolution = Vector2(960, 540)
+shader_parameter/color_bitdepth = 6
+shader_parameter/dither_strength = 0.2000000095
+shader_parameter/use_magic_matrix = false
+shader_parameter/enable_dedithering = false
+shader_parameter/dedither_strength = 1.0
+shader_parameter/enable_480i_upscale = true
+shader_parameter/scanline_intensity = 0.170000008075
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qhqgy"]
+shader = ExtResource("3_qhqgy")
+shader_parameter/virtual_resolution = Vector2(320, 240)
+shader_parameter/color_bitdepth = 5
+shader_parameter/dither_strength = 0.130000006175
+shader_parameter/use_magic_matrix = false
+shader_parameter/enable_dedithering = false
+shader_parameter/dedither_strength = 1.0
+shader_parameter/enable_480i_upscale = true
+shader_parameter/scanline_intensity = 0.1
+
+[sub_resource type="QuadMesh" id="QuadMesh_dqkch"]
+size = Vector2(2, 2)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2els"]
 radius = 0.737021
@@ -23,6 +49,7 @@ shape = SubResource("CapsuleShape3D_u8vuu")
 
 [node name="cameraviewport" type="SubViewportContainer" parent="."]
 visible = false
+material = SubResource("ShaderMaterial_dqkch")
 offset_right = 960.0
 offset_bottom = 540.0
 stretch = true
@@ -55,6 +82,12 @@ transform = Transform3D(0.98321, 0.0533203, -0.174512, -0.0151391, 0.976894, 0.2
 
 [node name="weapon" parent="cameraviewport/viewport/camera/wield" instance=ExtResource("2_g2els")]
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="cameraviewport/viewport/camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.50719786)
+visible = false
+material_override = SubResource("ShaderMaterial_qhqgy")
+mesh = SubResource("QuadMesh_dqkch")
+
 [node name="cameratar" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 
@@ -64,7 +97,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("CapsuleShape3D_g2els")
 
 [node name="mapmaker" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.74, 0, 0, 0, -7.6057816e-08, 0.48736838, 0, -1.74, -2.130355e-08, 0, 1.0825157, 0)
+transform = Transform3D(1.880435, 0, 0, 0, -9.425733e-08, 0.1869612, 0, -2.1563563, -8.172334e-09, 0, 1.7464769, 0)
 layers = 512
 material_override = SubResource("StandardMaterial3D_g2els")
 mesh = SubResource("PrismMesh_g2els")

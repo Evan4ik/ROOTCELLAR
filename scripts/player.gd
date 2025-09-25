@@ -110,6 +110,7 @@ func animBar(bar):
 	bar.custom_minimum_size.y = 0.0
 	await get_tree().create_timer(0.15).timeout
 	while(i < 20):
+		if (!is_instance_valid(bar)): return
 		bar.custom_minimum_size.y = lerp(bar.custom_minimum_size.y ,scaleY, 0.15)
 		i += 1
 		await get_tree().create_timer(0.01).timeout

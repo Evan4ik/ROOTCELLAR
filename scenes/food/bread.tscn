@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://svnf5bxoysdo"]
+[gd_scene load_steps=8 format=3 uid="uid://svnf5bxoysdo"]
 
 [ext_resource type="Script" uid="uid://cfm23rcexmnu8" path="res://scripts/food/bread.gd" id="1_rx1to"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m4rxf"]
+radius = 0.0643569
+height = 0.217727
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rx1to"]
 shading_mode = 2
@@ -8,22 +12,45 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.622196, 0.384225, 0.221077, 1)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m4rxf"]
-radius = 0.0643569
-height = 0.217727
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4rxf"]
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.622196, 0.384225, 0.221077, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xgrtl"]
+material = SubResource("StandardMaterial3D_m4rxf")
+top_radius = 0.53
+bottom_radius = 0.48
+height = 1.865
+radial_segments = 9
+rings = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhfmb"]
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0.6831509, 0.46711743, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2bbbm"]
+material = SubResource("StandardMaterial3D_vhfmb")
+top_radius = 0.53
+bottom_radius = 0.48
+height = 1.865
+radial_segments = 9
+rings = 0
 
 [node name="foodobj" type="RigidBody3D"]
 mass = 2.672
 script = ExtResource("1_rx1to")
 foodName = "Bread"
 foodDescription = "A nice snack and a good base ingredient"
+descriptionMods = Dictionary[String, String]({
+"sliced": "The best thing."
+})
 foodCategory = 1
 passiveDesc = "Restores %s HP on pickup"
 activeDesc = "Gain %s Temporary HP"
-
-[node name="mesh" type="CSGSphere3D" parent="."]
-transform = Transform3D(0.438608, 0, 0, 0, 0.438608, 0, 0, 0, 0.896599, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_rx1to")
 
 [node name="coll" type="CollisionShape3D" parent="."]
 transform = Transform3D(4.00023, 0, 0, 0, -1.74856e-07, -4.00023, 0, 4.00023, -1.74856e-07, 0, 0, 0)
@@ -35,3 +62,56 @@ transform = Transform3D(1.16895, 0, 0, 0, 1.16895, 0, 0, 0, 1.16895, 0, 0, 0)
 [node name="coll" type="CollisionShape3D" parent="foodarea"]
 transform = Transform3D(4.00023, 0, 0, 0, -1.74856e-07, -4.00023, 0, 4.00023, -1.74856e-07, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_m4rxf")
+
+[node name="mesh" type="Node3D" parent="."]
+
+[node name="default" type="CSGSphere3D" parent="mesh"]
+transform = Transform3D(0.438608, 0, 0, 0, 0.438608, 0, 0, 0, 0.896599, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_rx1to")
+
+[node name="sliced" type="Node3D" parent="mesh"]
+
+[node name="slice" type="MeshInstance3D" parent="mesh/sliced"]
+transform = Transform3D(0.6277482, 0, 0, 0, 0.017052371, -0.49037367, 0, 0.022471372, 0.3721194, 0, -0.056812882, -0.22680958)
+mesh = SubResource("CylinderMesh_xgrtl")
+
+[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice"]
+transform = Transform3D(0.8815312, 0, 0, 0, 0.8815311, 1.9073486e-06, 0, 0, 0.8815311, 0, 0.311539, -0.0030225883)
+mesh = SubResource("CylinderMesh_2bbbm")
+skeleton = NodePath("../..")
+
+[node name="slice5" type="MeshInstance3D" parent="mesh/sliced"]
+transform = Transform3D(0.52754986, 0, 0, 0, -0.0050635203, 0.5053857, 0, -0.023159299, -0.11049686, -0.0008121729, -0.04285033, 0.31215224)
+mesh = SubResource("CylinderMesh_xgrtl")
+
+[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice5"]
+transform = Transform3D(0.8815312, 0, 0, 0, 0.8815311, 1.9073486e-06, 0, 0, 0.8815311, 0, 0.311539, -0.0030225883)
+mesh = SubResource("CylinderMesh_2bbbm")
+skeleton = NodePath("../..")
+
+[node name="slice2" type="MeshInstance3D" parent="mesh/sliced"]
+transform = Transform3D(0.5401706, 0, 0, 0, 0.008816201, -0.49352717, 0, 0.022615883, 0.19238843, 0, -0.032979473, -0.14292066)
+mesh = SubResource("CylinderMesh_xgrtl")
+
+[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice2"]
+transform = Transform3D(0.8815312, 0, 0, 0, 1.4500037, 9.536743e-07, 0, 0, 0.83321667, 0, 0.3115394, -0.0030225925)
+mesh = SubResource("CylinderMesh_2bbbm")
+skeleton = NodePath("../..")
+
+[node name="slice3" type="MeshInstance3D" parent="mesh/sliced"]
+transform = Transform3D(0.54017055, 0, 0, 0, 0.0016805562, -0.5284292, 0, 0.02421527, 0.036673337, 0, -0.032979473, -0.06315754)
+mesh = SubResource("CylinderMesh_xgrtl")
+
+[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice3"]
+transform = Transform3D(0.8815312, 0, 0, 0, 1.4500037, 9.536743e-07, 0, 0, 0.83321667, 0, 0.3115394, -0.0030225925)
+mesh = SubResource("CylinderMesh_2bbbm")
+skeleton = NodePath("../..")
+
+[node name="slice4" type="MeshInstance3D" parent="mesh/sliced"]
+transform = Transform3D(0.54017043, 0, 0, 0, 0.007366229, -0.50472045, 0, 0.023128819, 0.16074687, 0, -0.032979473, 0.108622715)
+mesh = SubResource("CylinderMesh_xgrtl")
+
+[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice4"]
+transform = Transform3D(0.8815312, 0, 0, 0, 1.4500037, 9.536743e-07, 0, 0, 0.83321667, 0, 0.3115394, -0.0030225925)
+mesh = SubResource("CylinderMesh_2bbbm")
+skeleton = NodePath("../..")

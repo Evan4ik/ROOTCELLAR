@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dqmhby3lal428" path="res://scripts/food/water.gd" id="1_6dekt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dekt"]
-transparency = 1
 albedo_color = Color(0.46, 0.748, 1, 0.333333)
 refraction_enabled = true
 refraction_scale = -0.37

@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cpbebyr1751ug" path="res://scenes/food/bottledwater.tscn" id="13_jhx03"]
 [ext_resource type="PackedScene" uid="uid://dggw0xtnul7do" path="res://scenes/food/potatoe.tscn" id="14_o8fc1"]
 [ext_resource type="PackedScene" uid="uid://brjwm3hyyfqtb" path="res://scenes/food/pumpkin.tscn" id="15_xo05s"]
-[ext_resource type="PackedScene" uid="uid://bxx3x5pagmgq8" path="res://scenes/exit.tscn" id="16_dss4m"]
+[ext_resource type="PackedScene" uid="uid://bxx3x5pagmgq8" path="res://scenes/structures/exit.tscn" id="16_dss4m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3hyu"]
 albedo_color = Color(0.323495, 0.163479, 0.0957959, 1)
@@ -232,6 +232,7 @@ offset_bottom = 40.0
 z_index = 5
 position = Vector2(97, 2)
 script = ExtResource("3_qfnet")
+mode = 1
 
 [node name="container" type="GridContainer" parent="ui/foodcontainer"]
 layout_direction = 1
