@@ -1,6 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://0oa06mv5qa07"]
+[gd_scene load_steps=18 format=3 uid="uid://bpj06xxmb1fqu"]
 
-[ext_resource type="Script" uid="uid://cp5vrfse1ihvh" path="res://scripts/enemies/walker.gd" id="1_2jm2j"]
+[ext_resource type="Script" uid="uid://bpl83w3xcyot7" path="res://scripts/enemies/flowerman.gd" id="1_ti7ci"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a0451"]
 height = 1.3649902
@@ -101,6 +101,42 @@ tracks/6/keys = {
 "update": 0,
 "values": [Vector3(1, 1, 1)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("mesh/stem:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("mesh/leg:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("mesh/leg2:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_apytk"]
 resource_name = "die"
@@ -142,8 +178,8 @@ tracks/2/keys = {
 "values": [Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(1, 1, -0.74)]
 }
 
-[sub_resource type="Animation" id="Animation_2jm2j"]
-resource_name = "spot"
+[sub_resource type="Animation" id="Animation_ti7ci"]
+resource_name = "digin"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -154,7 +190,95 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.433333, 0.966667),
 "transitions": PackedFloat32Array(0.5, 2.21914, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0.46, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0.11, 0), Vector3(0, -0.47, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mesh/stem:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("mesh/leg:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.033333335, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("mesh/leg2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.033333335, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_nkoy5"]
+resource_name = "spot"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.433333, 0.8),
+"transitions": PackedFloat32Array(0.5176323, 2.21914, 0.5),
+"update": 0,
+"values": [Vector3(0, -0.47, 0), Vector3(0, 0.11, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("mesh/stem:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("mesh/leg:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("mesh/leg2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_v1rg7"]
@@ -213,7 +337,8 @@ tracks/3/keys = {
 _data = {
 &"RESET": SubResource("Animation_67ber"),
 &"die": SubResource("Animation_apytk"),
-&"spot": SubResource("Animation_2jm2j"),
+&"digin": SubResource("Animation_ti7ci"),
+&"spot": SubResource("Animation_nkoy5"),
 &"walk": SubResource("Animation_v1rg7")
 }
 
@@ -231,8 +356,15 @@ shading_mode = 0
 albedo_color = Color(1, 0, 0, 0.447059)
 uv1_scale = Vector3(2.99, 1.995, 2.99)
 
-[node name="walker" type="CharacterBody3D"]
-script = ExtResource("1_2jm2j")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_67ber"]
+albedo_color = Color(0.9607843, 0.94491154, 0.43137252, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1rg7"]
+
+[node name="flowerman" type="CharacterBody3D"]
+script = ExtResource("1_ti7ci")
+speed = 4.5
+maxDistance = 25.0
 hp = 6.0
 hitPath = "mesh/head/hit"
 
@@ -302,6 +434,12 @@ material_override = SubResource("StandardMaterial3D_a0451")
 mesh = SubResource("BoxMesh_4ra3w")
 skeleton = NodePath("../../..")
 
+[node name="stem" type="MeshInstance3D" parent="mesh"]
+transform = Transform3D(0.46963733, 0, 0, 0, 0.10608615, -0.049804766, 0, 0.034674298, 0.15237787, -0.008433193, -0.42480245, -0.033151)
+material_override = SubResource("StandardMaterial3D_a0451")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../..")
+
 [node name="head" type="MeshInstance3D" parent="mesh"]
 transform = Transform3D(0.17444442, 0, 0, 0, 0.71151, 0, 0, 0, 0.17444442, 0, -0.10209012, -0.027715012)
 material_override = SubResource("StandardMaterial3D_2jm2j")
@@ -318,6 +456,60 @@ skeleton = NodePath("../../..")
 [node name="hit" type="MeshInstance3D" parent="mesh/head/hit"]
 transform = Transform3D(1.5, 0, 0, 0, 0.2, 0, 0, 0, 1.5, 0, 0.52343535, 0)
 material_override = SubResource("StandardMaterial3D_7p1mj")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../../..")
+
+[node name="flower" type="MeshInstance3D" parent="mesh/head"]
+transform = Transform3D(1.5, 0, 0, 0, 0.2, 0, 0, 0, 1.5, 0, 0.52343535, 0)
+material_override = SubResource("StandardMaterial3D_67ber")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../../..")
+
+[node name="petal2" type="MeshInstance3D" parent="mesh/head"]
+transform = Transform3D(1.101402, 0.008080213, 0, -0.08281475, 0.10746335, 0, 0, 0, 1.693781, -1.1625162, 0.49117425, 0)
+material_override = SubResource("StandardMaterial3D_v1rg7")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../../..")
+
+[node name="petal3" type="MeshInstance3D" parent="mesh/head"]
+transform = Transform3D(-1.101402, -0.008080211, -1.4807506e-07, -0.082814835, 0.10746335, 0, 9.628763e-08, 7.063944e-10, -1.6937811, 1.1418506, 0.49117425, 0)
+material_override = SubResource("StandardMaterial3D_v1rg7")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../../..")
+
+[node name="petal4" type="MeshInstance3D" parent="mesh/head"]
+transform = Transform3D(-0.013590424, -9.970397e-05, 1.693652, -0.082814746, 0.107463345, 0, -1.1013184, -0.0080796, -0.020899912, 0.0038841988, 0.49117425, 1.1520958)
+material_override = SubResource("StandardMaterial3D_v1rg7")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../../..")
+
+[node name="petal5" type="MeshInstance3D" parent="mesh/head"]
+transform = Transform3D(0.013590521, 9.970465e-05, -1.6936522, -0.08281483, 0.107463345, -7.622397e-16, 1.1013184, 0.008079597, 0.020900061, -0.024549855, 0.49117425, -1.1520958)
+material_override = SubResource("StandardMaterial3D_v1rg7")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../../..")
+
+[node name="petal6" type="MeshInstance3D" parent="mesh/head"]
+transform = Transform3D(0.8702334, 0.0063842908, 0.7873637, -0.07591773, 0.098513536, 0, -0.51199305, -0.0037561334, 1.3382804, -0.92068934, 0.44667146, 0.5355991)
+material_override = SubResource("StandardMaterial3D_v1rg7")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../../..")
+
+[node name="petal7" type="MeshInstance3D" parent="mesh/head"]
+transform = Transform3D(-0.87023336, -0.006384289, -0.7873639, -0.07591781, 0.098513536, -1.546005e-15, 0.5119931, 0.003756133, -1.3382806, 0.9000237, 0.44667146, -0.53559905)
+material_override = SubResource("StandardMaterial3D_v1rg7")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../../..")
+
+[node name="petal8" type="MeshInstance3D" parent="mesh/head"]
+transform = Transform3D(-0.52269214, -0.0038346255, 1.328463, -0.075917736, 0.098513536, -1.2701612e-10, -0.8638496, -0.0063374573, -0.80381715, 0.5364586, 0.44667146, 0.9036784)
+material_override = SubResource("StandardMaterial3D_v1rg7")
+mesh = SubResource("BoxMesh_4ra3w")
+skeleton = NodePath("../../..")
+
+[node name="petal9" type="MeshInstance3D" parent="mesh/head"]
+transform = Transform3D(0.52269226, 0.003834625, -1.3284632, -0.07591781, 0.098513536, -1.3975172e-15, 0.8638496, 0.0063374564, 0.8038174, -0.5571242, 0.44667146, -0.9036785)
+material_override = SubResource("StandardMaterial3D_v1rg7")
 mesh = SubResource("BoxMesh_4ra3w")
 skeleton = NodePath("../../..")
 
