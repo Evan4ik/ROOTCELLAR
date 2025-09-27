@@ -20,6 +20,7 @@ script = ExtResource("1_6dekt")
 foodName = "Water"
 foodDescription = "Liquid found in most places and things."
 foodCategory = 7
+lifeTime = Vector2(800, 900)
 passiveDesc = "Restore %s HP every 60 seconds."
 activeAmt = 2.0
 activeDesc = "Restore %s HP."

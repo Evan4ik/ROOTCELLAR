@@ -31,6 +31,7 @@ foodName = "Bottled Water"
 foodDescription = "Water that's packaged in a way that makes it trickier to lose."
 foodCategory = 7
 rarity = 1
+lifeTime = Vector2(2500, 3000)
 passiveDesc = "Restore %s HP every 60 seconds."
 activeAmt = 2.0
 activeDesc = "Restore %s HP."

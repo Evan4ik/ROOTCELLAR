@@ -49,6 +49,7 @@ descriptionMods = Dictionary[String, String]({
 "sliced": "The best thing."
 })
 foodCategory = 1
+lifeTime = Vector2(500, 600)
 passiveDesc = "Restores %s HP on pickup"
 activeDesc = "Gain %s Temporary HP"
 

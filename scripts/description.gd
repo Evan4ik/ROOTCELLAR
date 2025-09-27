@@ -40,7 +40,7 @@ func showDesc(text: String, tags:Dictionary[String, String]) -> void:
 		self.global_transform.origin = get_global_mouse_position() + Vector2.RIGHT * 3.0
 		self.position.y -= $text.size.y / 2.0
 		
-		$text/tags.size.x = $text.size.x
+		$text/tags.size.x = min($text.size.x, 205)
 		$bg.size = $text.size
 		await get_tree().create_timer(0.001).timeout
 		i += 1

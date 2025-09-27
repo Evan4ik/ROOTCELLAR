@@ -45,6 +45,7 @@ script = ExtResource("1_o48mw")
 foodName = "Pumpkin"
 foodCategory = 2
 rarity = 2
+lifeTime = Vector2(260, 300)
 passiveDesc = "Halves your movement speed,
 Generate %s Temporary HP every 60 seconds."
 activeAmt = 2.0

@@ -19,6 +19,7 @@ foodName = "JohnsonStone"
 foodDescription = "Do not"
 foodCategory = 3
 rarity = 3
+lifeTimeMult = 6.0
 passiveDesc = "He wil scream if you touch him"
 activeDesc = "flesh"
 

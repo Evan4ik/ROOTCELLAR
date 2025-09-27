@@ -20,6 +20,7 @@ script = ExtResource("1_w3fqf")
 foodName = "Potato"
 foodDescription = "You'd be surprised at how many things you can do with one of these."
 foodCategory = 2
+lifeTime = Vector2(300, 450)
 passiveAmt = 1.5
 passiveDesc = "Increase weapon range by x%s "
 activeAmt = 1.25

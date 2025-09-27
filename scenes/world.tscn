@@ -233,7 +233,6 @@ offset_bottom = 40.0
 z_index = 5
 position = Vector2(97, 2)
 script = ExtResource("3_qfnet")
-mode = 1
 
 [node name="container" type="GridContainer" parent="ui/foodcontainer"]
 layout_direction = 1
@@ -292,15 +291,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0490875, -0.239067, 0.6666
 
 [node name="tags" type="GridContainer" parent="ui/description/text"]
 layout_mode = 0
-offset_left = -1.0
+offset_left = 17.823502
 offset_top = 41.0
-offset_right = 251.0
+offset_right = 223.8235
 offset_bottom = 111.0
 pivot_offset = Vector2(0.56, 0)
 theme_override_constants/h_separation = 1
 theme_override_constants/v_separation = 0
+columns = 2
 
 [node name="tag" parent="ui/description/text/tags" instance=ExtResource("7_q5onr")]
+layout_mode = 2
+
+[node name="tag2" parent="ui/description/text/tags" instance=ExtResource("7_q5onr")]
 layout_mode = 2
 
 [node name="crosshair" type="Node2D" parent="ui"]

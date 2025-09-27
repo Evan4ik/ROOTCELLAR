@@ -57,6 +57,16 @@ func consume():
 	currentFood.togglePassive(false)
 	
 	i = 0
+	
+	
+	if ("Sliced" in currentFood.foodName and !("eaten") in currentFood.modifiers): 
+		currentFood.modifiers.append("eaten")
+		while(i < 20):
+			self.scale = lerp(self.scale, Vector2.ONE, 0.15)
+			i += 1
+			await get_tree().create_timer(0.01).timeout
+		return
+	
 	while(i < 20):
 		description.hideDesc()
 		self.scale = lerp(self.scale, Vector2.ZERO, 0.25)

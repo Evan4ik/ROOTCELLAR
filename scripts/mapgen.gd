@@ -118,7 +118,7 @@ func generate() ->void:
 		i = 1
 		while(i < groups.size()):
 			var connectTo = groups[i]
-			if (connectTo.size() < 2):
+			if (connectTo.size() < 260):
 				i += 1 
 				continue
 			
