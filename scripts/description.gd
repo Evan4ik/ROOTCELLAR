@@ -34,7 +34,7 @@ func showDesc(text: String, tags:Dictionary[String, String]) -> void:
 			return
 		
 		$text.get_child(0, true).modulate.a = 0.0
-		$text.size = lerp($text.size, $text.size + Vector2.ONE * 24.0, 0.425)
+		$text.size += Vector2.ONE * 16.0
 		$text.size.x = min($text.size.x, 256.0)
 		
 		self.global_transform.origin = get_global_mouse_position() + Vector2.RIGHT * 3.0

@@ -7,6 +7,9 @@ var shown:bool = false
 
 
 func _process(delta: float) -> void:
+	if (Input.is_action_just_pressed("grab")): 
+		mode = wrapi(mode + 1, 0, 2)
+		refreshFood(true)
 	if !(Input.is_action_just_pressed("foodmenu")): return
 	shown = !shown
 	player.set_process_input(!shown)
@@ -14,6 +17,7 @@ func _process(delta: float) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if !shown else Input.MOUSE_MODE_VISIBLE
 	refreshFood(shown)
 	get_tree().paused = shown
+
 
 func refreshFood(shown: bool):
 	for child in $container.get_children(): 

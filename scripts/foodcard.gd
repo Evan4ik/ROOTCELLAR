@@ -54,7 +54,6 @@ func consume():
 		return
 	
 	currentFood._active()
-	currentFood.togglePassive(false)
 	
 	i = 0
 	
@@ -66,6 +65,8 @@ func consume():
 			i += 1
 			await get_tree().create_timer(0.01).timeout
 		return
+	
+	currentFood.togglePassive(false)
 	
 	while(i < 20):
 		description.hideDesc()

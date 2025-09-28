@@ -68,12 +68,14 @@ shape = SubResource("CapsuleShape3D_m4rxf")
 
 [node name="default" type="CSGSphere3D" parent="mesh"]
 transform = Transform3D(0.438608, 0, 0, 0, 0.438608, 0, 0, 0, 0.896599, 0, 0, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_rx1to")
 
 [node name="sliced" type="Node3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 0.070435524, 0.99751633, 0, -0.99751633, 0.070435524, 0, 0, 0)
 
 [node name="slice" type="MeshInstance3D" parent="mesh/sliced"]
-transform = Transform3D(0.6277482, 0, 0, 0, 0.017052371, -0.49037367, 0, 0.022471372, 0.3721194, 0, -0.056812882, -0.22680958)
+transform = Transform3D(0.5741865, 0, 0, 0, 0.0023559667, -0.52105886, 0, 0.020253668, 0.060611147, 0, -0.056812882, -0.14088553)
 mesh = SubResource("CylinderMesh_xgrtl")
 
 [node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice"]
@@ -82,37 +84,10 @@ mesh = SubResource("CylinderMesh_2bbbm")
 skeleton = NodePath("../..")
 
 [node name="slice5" type="MeshInstance3D" parent="mesh/sliced"]
-transform = Transform3D(0.52754986, 0, 0, 0, -0.0050635203, 0.5053857, 0, -0.023159299, -0.11049686, -0.0008121729, -0.04285033, 0.31215224)
+transform = Transform3D(0.52754986, 0, 0, 0, -0.0018269832, 0.5157856, 0, -0.023635875, -0.039868668, -0.0008121729, -0.023659118, 0.092730045)
 mesh = SubResource("CylinderMesh_xgrtl")
 
 [node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice5"]
 transform = Transform3D(0.8815312, 0, 0, 0, 0.8815311, 1.9073486e-06, 0, 0, 0.8815311, 0, 0.311539, -0.0030225883)
-mesh = SubResource("CylinderMesh_2bbbm")
-skeleton = NodePath("../..")
-
-[node name="slice2" type="MeshInstance3D" parent="mesh/sliced"]
-transform = Transform3D(0.5401706, 0, 0, 0, 0.008816201, -0.49352717, 0, 0.022615883, 0.19238843, 0, -0.032979473, -0.14292066)
-mesh = SubResource("CylinderMesh_xgrtl")
-
-[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice2"]
-transform = Transform3D(0.8815312, 0, 0, 0, 1.4500037, 9.536743e-07, 0, 0, 0.83321667, 0, 0.3115394, -0.0030225925)
-mesh = SubResource("CylinderMesh_2bbbm")
-skeleton = NodePath("../..")
-
-[node name="slice3" type="MeshInstance3D" parent="mesh/sliced"]
-transform = Transform3D(0.54017055, 0, 0, 0, 0.0016805562, -0.5284292, 0, 0.02421527, 0.036673337, 0, -0.032979473, -0.06315754)
-mesh = SubResource("CylinderMesh_xgrtl")
-
-[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice3"]
-transform = Transform3D(0.8815312, 0, 0, 0, 1.4500037, 9.536743e-07, 0, 0, 0.83321667, 0, 0.3115394, -0.0030225925)
-mesh = SubResource("CylinderMesh_2bbbm")
-skeleton = NodePath("../..")
-
-[node name="slice4" type="MeshInstance3D" parent="mesh/sliced"]
-transform = Transform3D(0.54017043, 0, 0, 0, 0.007366229, -0.50472045, 0, 0.023128819, 0.16074687, 0, -0.032979473, 0.108622715)
-mesh = SubResource("CylinderMesh_xgrtl")
-
-[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice4"]
-transform = Transform3D(0.8815312, 0, 0, 0, 1.4500037, 9.536743e-07, 0, 0, 0.83321667, 0, 0.3115394, -0.0030225925)
 mesh = SubResource("CylinderMesh_2bbbm")
 skeleton = NodePath("../..")

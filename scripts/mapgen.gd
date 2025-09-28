@@ -118,7 +118,7 @@ func generate() ->void:
 		i = 1
 		while(i < groups.size()):
 			var connectTo = groups[i]
-			if (connectTo.size() < 260):
+			if (connectTo.size() < 2):
 				i += 1 
 				continue
 			
@@ -141,6 +141,7 @@ func generate() ->void:
 				if(hitsA[h][0] >= 0) and (hitsA[h][1] == 0 or !connectedGroups.has(hitsA[h][1])): 
 					map = boreDirection(start, map, hitDir[h].x, hitDir[h].y, hitsA[h][0])
 					connectedGroups.append(hitsA[h][1])
+					break
 				j += 1
 			i += 1
 	var startIndeces = []

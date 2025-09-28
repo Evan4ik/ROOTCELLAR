@@ -28,13 +28,6 @@ offset_right = 62.0
 offset_bottom = 82.0
 mouse_filter = 1
 
-[node name="shadow" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0, 0, 0, 1)
-position = Vector2(32, 42)
-scale = Vector2(1.04, 1.04)
-texture = SubResource("ViewportTexture_8rhpb")
-
 [node name="sprite" type="Sprite2D" parent="."]
 position = Vector2(32, 42)
 texture = SubResource("ViewportTexture_8rhpb")

@@ -22,7 +22,7 @@ func _ready() -> void:
 var camBob:float = 0.0
 
 func get_input(delta:float) -> void:
-	delta *= 100.0
+	delta *= 50.0
 	if Input.is_action_pressed("up"): velocity -= basis.z * speed * delta
 	if Input.is_action_pressed("down"): velocity += basis.z * speed * delta
 	if Input.is_action_pressed("left"): velocity -= basis.x * speed * delta

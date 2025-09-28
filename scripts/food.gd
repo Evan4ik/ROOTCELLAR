@@ -14,7 +14,7 @@ enum foodCategories { FOOD_NONE, FOOD_BAKED, FOOD_NATURAL, FOOD_MEAT, FOOD_DAIRY
 
 @export var lifeTime:Vector2 = Vector2(60, 120)
 var startTime:float = 120
-var life:float = 120
+var life:String = "Fresh"
 @export var lifeTimeMult:float = 1.0
 
 @export_category("Effects") 
@@ -42,20 +42,18 @@ func _ready() -> void:
 	for child in $mesh.get_children(): child.visible = child.name == "default"
 	var r= RandomNumberGenerator.new()
 	r.randomize()
-	life = r.randf_range(lifeTime[0], lifeTime[1])
+	startTime = r.randf_range(lifeTime[0], lifeTime[1])
 	lifeTimer()
 
 func lifeTimer():
-	startTime = life
-	var end = -startTime
-	while(life > 0):
-		life -= 0.1 * lifeTimeMult
-		await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer( (startTime / 2.0) / lifeTimeMult).timeout
+	life = "Aged"
+	await get_tree().create_timer( (startTime / 2.0) / lifeTimeMult).timeout
+	life = "Moldy"
 	pMultiplier *= 0.5
-	while(life > end):
-		life -= 0.1 * (lifeTimeMult / 2.0)
-		await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer( (startTime) / max(lifeTimeMult / 2.0, 1.0)).timeout
 	pMultiplier = 0.0
+	life = "Rotten"
 	
 
 func getDisplayNumbers():
@@ -88,17 +86,12 @@ func getDescription() -> Array:
 	var catNames:Dictionary = {foodCategories.FOOD_BAKED: "Baked", foodCategories.FOOD_MEAT: "Meaty", foodCategories.FOOD_NATURAL: "Natural", 
 	foodCategories.FOOD_DAIRY: "Dairy", foodCategories.FOOD_SWEET: "Sweet", foodCategories.FOOD_SNACK: "Snack",  foodCategories.FOOD_LIQUID: "Liquid"}
 	
-	var lifeStates = {0: ["Fresh", "#97FFDF"], 1: ["Aged", "#ABFF97"], 2: ["Moldy", "#C9E564"], 3: ["Rotten", "#B09A45"]}
-	var lifeState = 0
-	if (life > startTime / 2.0): lifeState = 0
-	elif (life > 0): lifeState = 1
-	elif (life > startTime / -2.0): lifeState = 2
-	else: lifeState = 3
+	var lifeStates = {"Fresh": "#97FFDF", "Aged": "#ABFF97", "Moldy": "#C9E564", "Rotten": "#B09A45"}
 	
 	
 	var tags:Dictionary[String, String] = {}
 	tags[catNames[foodCategory]] = catColors[foodCategory]
-	tags[lifeStates[lifeState][0]] = lifeStates[lifeState][1]
+	tags[life] = lifeStates[life]
 	
 	
 	var lineAmount = ceil(tags.size() / 2.0) + 1
