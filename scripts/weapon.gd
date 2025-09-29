@@ -1,14 +1,15 @@
 extends Node
 class_name Weapon
 
+@export var weaponName:String = ""
 @export var damage:float = 1.0
 @export var critChance:int = 25
 @export var coolDowns:Dictionary[String, float] = {"swing": 0.5, "sideswing": 0.4, "forwardswing": 0.6}
 
 @export_category("Multipliers")
-@export var rangeMultiplier:float = 1.0
-@export var damageMultiplier:float = 1.0
-@export var cdMultiplier:float = 1.0
+@export var rangeMultipliers:PackedFloat32Array = [1.0]
+@export var damageMultipliers:PackedFloat32Array = [1.0]
+@export var cdMultipliers:PackedFloat32Array = [1.0]
 
 var hits:Array = []
 
@@ -27,6 +28,11 @@ func swing():
 	if cd: return
 	hits = [].duplicate()
 	cd = true
+	
+	var rangeMultiplier:float = 0.0
+	for mult in rangeMultipliers: rangeMultiplier += mult
+	print(rangeMultiplier)
+	
 	$range.scale = Vector3.ONE * rangeMultiplier
 	$range.position.z = $range.scale.x / -1.3
 	$slash.scale.z = $range.scale.x
@@ -35,6 +41,10 @@ func swing():
 	$anim.stop()
 	playSwingAnim()
 	$slash/slash.rotation_degrees = Vector3(r.randf_range(-25.0, 25.0), r.randf_range(-8.0, 8.0), r.randf_range(-5.0, 5.0))
+	
+	var cdMultiplier:float = 0.0
+	for mult in cdMultipliers: cdMultiplier += mult
+	
 	await get_tree().create_timer(coolDowns[currentSwing] * cdMultiplier).timeout
 	cd = false
 	$range/coll.disabled = true
@@ -81,5 +91,9 @@ func calculateHit() -> float:
 	r.randomize()
 	
 	if (r.randi_range(0, 100) <= critChance): calcDamage *= 2.0
+	
+	var damageMultiplier:float = 0.0
+	for mult in damageMultipliers: damageMultiplier += mult	
+	print(damageMultiplier)
 	
 	return calcDamage * damageMultiplier

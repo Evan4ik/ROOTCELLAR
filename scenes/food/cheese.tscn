@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dnets81x8dl6c"]
+[gd_scene load_steps=8 format=3 uid="uid://dnets81x8dl6c"]
 
-[ext_resource type="Script" uid="uid://cfm23rcexmnu8" path="res://scripts/food/bread.gd" id="1_fnjf8"]
+[ext_resource type="Script" uid="uid://dghd5fyu4wgyv" path="res://scripts/food/cheese.gd" id="1_fnjf8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fnjf8"]
 size = Vector3(0.09375, 0.13378906, 0.080078125)
@@ -8,37 +8,6 @@ size = Vector3(0.09375, 0.13378906, 0.080078125)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3wih4"]
 radius = 0.07763672
 height = 0.19040647
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4rxf"]
-shading_mode = 2
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.622196, 0.384225, 0.221077, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_xgrtl"]
-material = SubResource("StandardMaterial3D_m4rxf")
-top_radius = 0.53
-bottom_radius = 0.48
-height = 1.865
-radial_segments = 9
-rings = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhfmb"]
-shading_mode = 2
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(1, 0.6831509, 0.46711743, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_2bbbm"]
-material = SubResource("StandardMaterial3D_vhfmb")
-top_radius = 0.53
-bottom_radius = 0.48
-height = 1.865
-radial_segments = 9
-rings = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fn0dk"]
-albedo_color = Color(0.9752062, 0.80615216, 0.5068435, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_we1fn"]
 albedo_color = Color(1, 0.76192594, 0.33558714, 1)
@@ -48,16 +17,22 @@ albedo_color = Color(1, 0.76192594, 0.33558714, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bv1nt"]
 albedo_color = Color(0.819067, 0.6168074, 0.25870854, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fn0dk"]
+albedo_color = Color(0.9752062, 0.80615216, 0.5068435, 1)
+
 [node name="cheese" type="RigidBody3D"]
 mass = 2.672
 script = ExtResource("1_fnjf8")
 foodName = "Cheese"
-foodDescription = "Effect is boosted with age.. Well at least until it rots."
+foodDescription = "Becomes more potent with age.. Well until it rots at least."
 foodCategory = 4
-lifeTime = Vector2(500, 600)
-lifeTimeMult = 1.5
-passiveDesc = "Restores %s HP on pickup"
-activeDesc = "Gain %s Temporary HP"
+rarity = 1
+lifeTime = Vector2(400, 600)
+lifeTimeMult = 64.0
+passiveAmt = 0.0
+passiveDesc = "Add %s to your damage multiplier"
+activeAmt = 5.0
+activeDesc = "Deal %s damage to all enemies nearby."
 
 [node name="coll" type="CollisionShape3D" parent="."]
 transform = Transform3D(4.00023, 0, 0, 0, -1.74856e-07, -4.00023, 0, 4.00023, -1.74856e-07, 0, -2.134474e-09, 0.048830986)
@@ -73,54 +48,48 @@ shape = SubResource("CapsuleShape3D_3wih4")
 [node name="mesh" type="Node3D" parent="."]
 
 [node name="sliced" type="Node3D" parent="mesh"]
-visible = false
 
-[node name="slice" type="MeshInstance3D" parent="mesh/sliced"]
-transform = Transform3D(0.6277482, 0, 0, 0, 0.017052371, -0.49037367, 0, 0.022471372, 0.3721194, 0, -0.056812882, -0.22680958)
-mesh = SubResource("CylinderMesh_xgrtl")
+[node name="cheese" type="CSGMesh3D" parent="mesh/sliced"]
+transform = Transform3D(0.346, 0, 0, 0, -1.7134864e-08, 0.012411145, 0, -0.392, -5.4250837e-10, 0, -0.1610825, 0.035026044)
+material_override = SubResource("StandardMaterial3D_we1fn")
+mesh = SubResource("PrismMesh_0nfsq")
 
-[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice"]
-transform = Transform3D(0.8815312, 0, 0, 0, 0.8815311, 1.9073486e-06, 0, 0, 0.8815311, 0, 0.311539, -0.0030225883)
-mesh = SubResource("CylinderMesh_2bbbm")
-skeleton = NodePath("../..")
+[node name="hole" type="CSGSphere3D" parent="mesh/sliced/cheese"]
+transform = Transform3D(2.8901732, 0, 0, 0, -5.775403e-07, -2.5510106, 0, 17.497742, -1.4767306e-07, 0.17317492, 3.900945e-09, -0.11818696)
+operation = 2
+radius = 0.058110137
+radial_segments = 4
+rings = 3
+material = SubResource("StandardMaterial3D_bv1nt")
 
-[node name="slice5" type="MeshInstance3D" parent="mesh/sliced"]
-transform = Transform3D(0.52754986, 0, 0, 0, -0.0050635203, 0.5053857, 0, -0.023159299, -0.11049686, -0.0008121729, -0.04285033, 0.31215224)
-mesh = SubResource("CylinderMesh_xgrtl")
+[node name="cheese2" type="CSGMesh3D" parent="mesh/sliced"]
+transform = Transform3D(0.33087257, 0.11464241, 1.5865935e-10, 0, -1.7134862e-08, 0.012411145, 0.10118947, -0.37486142, -5.1878946e-10, 0, -0.13959545, 0.035026044)
+material_override = SubResource("StandardMaterial3D_we1fn")
+mesh = SubResource("PrismMesh_0nfsq")
 
-[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice5"]
-transform = Transform3D(0.8815312, 0, 0, 0, 0.8815311, 1.9073486e-06, 0, 0, 0.8815311, 0, 0.311539, -0.0030225883)
-mesh = SubResource("CylinderMesh_2bbbm")
-skeleton = NodePath("../..")
+[node name="hole" type="CSGSphere3D" parent="mesh/sliced/cheese2"]
+transform = Transform3D(2.4440043, -1.25864e-05, 1.3616704, 1.5427074, -4.217676e-06, -2.1571994, 2.1298663e-06, 17.497742, 3.9602355e-07, -0.13576283, -0.19987473, -0.118186)
+operation = 2
+radius = 0.062181804
+radial_segments = 4
+rings = 3
+material = SubResource("StandardMaterial3D_bv1nt")
 
-[node name="slice2" type="MeshInstance3D" parent="mesh/sliced"]
-transform = Transform3D(0.5401706, 0, 0, 0, 0.008816201, -0.49352717, 0, 0.022615883, 0.19238843, 0, -0.032979473, -0.14292066)
-mesh = SubResource("CylinderMesh_xgrtl")
+[node name="cheese3" type="CSGMesh3D" parent="mesh/sliced"]
+transform = Transform3D(0.34027746, -0.070999, -9.8259095e-11, 0, -1.7134862e-08, 0.012411145, -0.06266749, -0.38551667, -5.3353577e-10, 0, -0.12068376, 0.035026044)
+material_override = SubResource("StandardMaterial3D_we1fn")
+mesh = SubResource("PrismMesh_0nfsq")
 
-[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice2"]
-transform = Transform3D(0.8815312, 0, 0, 0, 1.4500037, 9.536743e-07, 0, 0, 0.83321667, 0, 0.3115394, -0.0030225925)
-mesh = SubResource("CylinderMesh_2bbbm")
-skeleton = NodePath("../..")
-
-[node name="slice3" type="MeshInstance3D" parent="mesh/sliced"]
-transform = Transform3D(0.54017055, 0, 0, 0, 0.0016805562, -0.5284292, 0, 0.02421527, 0.036673337, 0, -0.032979473, -0.06315754)
-mesh = SubResource("CylinderMesh_xgrtl")
-
-[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice3"]
-transform = Transform3D(0.8815312, 0, 0, 0, 1.4500037, 9.536743e-07, 0, 0, 0.83321667, 0, 0.3115394, -0.0030225925)
-mesh = SubResource("CylinderMesh_2bbbm")
-skeleton = NodePath("../..")
-
-[node name="slice4" type="MeshInstance3D" parent="mesh/sliced"]
-transform = Transform3D(0.54017043, 0, 0, 0, 0.007366229, -0.50472045, 0, 0.023128819, 0.16074687, 0, -0.032979473, 0.108622715)
-mesh = SubResource("CylinderMesh_xgrtl")
-
-[node name="inside" type="MeshInstance3D" parent="mesh/sliced/slice4"]
-transform = Transform3D(0.8815312, 0, 0, 0, 1.4500037, 9.536743e-07, 0, 0, 0.83321667, 0, 0.3115394, -0.0030225925)
-mesh = SubResource("CylinderMesh_2bbbm")
-skeleton = NodePath("../..")
+[node name="hole" type="CSGSphere3D" parent="mesh/sliced/cheese3"]
+transform = Transform3D(2.4440043, -1.2586401e-05, 1.3616705, 1.5427074, -4.2176757e-06, -2.1571994, 2.1298665e-06, 17.497742, 3.9602355e-07, 0.11417665, -0.24050349, -0.118186)
+operation = 2
+radius = 0.062181804
+radial_segments = 4
+rings = 3
+material = SubResource("StandardMaterial3D_bv1nt")
 
 [node name="default" type="Node3D" parent="mesh"]
+visible = false
 
 [node name="wheel" type="CSGCylinder3D" parent="mesh/default"]
 transform = Transform3D(1, 0, 0, 0, 0.15244031, 0, 0, 0, 0.6471094, -0.0006558895, 0.0003423812, 0.19210404)

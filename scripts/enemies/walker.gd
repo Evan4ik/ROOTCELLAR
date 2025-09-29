@@ -12,6 +12,7 @@ var chase:Node3D = null
 var anim:bool = false
 
 func _ready() -> void: 
+	self.add_to_group("enemysdwasdaw			")
 	targets = [].duplicate()
 	$vision.area_entered.connect(see)
 	_doPattern()
@@ -30,7 +31,7 @@ func die():
 	$anim.play("die")
 	$phit/coll.disabled = true
 	
-	while($anim.is_playing()): await get_tree().create_timer(0.01).timeout
+	await get_tree().create_timer($anim.current_animation_length).timeout
 	self.queue_free()
 
 func see(area) -> void:

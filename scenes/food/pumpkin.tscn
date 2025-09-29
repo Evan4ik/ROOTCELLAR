@@ -43,6 +43,7 @@ albedo_color = Color(0.961629, 0.552728, 0.208875, 1)
 mass = 39.159
 script = ExtResource("1_o48mw")
 foodName = "Pumpkin"
+foodDescription = "That's scary. Isn't it?"
 foodCategory = 2
 rarity = 2
 lifeTime = Vector2(260, 300)

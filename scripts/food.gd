@@ -14,7 +14,7 @@ enum foodCategories { FOOD_NONE, FOOD_BAKED, FOOD_NATURAL, FOOD_MEAT, FOOD_DAIRY
 
 @export var lifeTime:Vector2 = Vector2(60, 120)
 var startTime:float = 120
-var life:String = "Fresh"
+var life:float = 120
 @export var lifeTimeMult:float = 1.0
 
 @export_category("Effects") 
@@ -44,20 +44,27 @@ func _ready() -> void:
 	r.randomize()
 	startTime = r.randf_range(lifeTime[0], lifeTime[1])
 	lifeTimer()
+	readyArgs()
+
+func readyArgs() -> void: pass
 
 func lifeTimer():
-	await get_tree().create_timer( (startTime / 2.0) / lifeTimeMult).timeout
-	life = "Aged"
-	await get_tree().create_timer( (startTime / 2.0) / lifeTimeMult).timeout
-	life = "Moldy"
-	pMultiplier *= 0.5
-	await get_tree().create_timer( (startTime) / max(lifeTimeMult / 2.0, 1.0)).timeout
-	pMultiplier = 0.0
-	life = "Rotten"
-	
+	life = startTime
+	while( life >= -startTime ):
+		if (get_tree().paused):
+			await get_tree().create_timer(0.1).timeout
+			continue
+		if (life == 0): moldify()
+		life -= 0.11 * lifeTimeMult
+		await get_tree().create_timer(0.1).timeout
+	moldify(true)
+
+func moldify(rot = false):
+	pMultiplier /= 2.0
+	aMultiplier /= 2.0
 
 func getDisplayNumbers():
-	var ret:Array = [ passiveAmt, activeAmt]
+	var ret:Array = [ passiveAmt * pMultiplier, activeAmt * aMultiplier]
 	return addMultColors(ret)
 
 func addMultColors(ret):
@@ -91,7 +98,14 @@ func getDescription() -> Array:
 	
 	var tags:Dictionary[String, String] = {}
 	tags[catNames[foodCategory]] = catColors[foodCategory]
-	tags[life] = lifeStates[life]
+	var lifeState:String = "Fresh"
+	
+	if (life > startTime / 2.0): lifeState = "Fresh"
+	elif (life > 0): lifeState = "Aged"
+	elif (life > -startTime): lifeState = "Moldy"
+	else: lifeState = "Rotten"
+	
+	tags[lifeState] = lifeStates[lifeState]
 	
 	
 	var lineAmount = ceil(tags.size() / 2.0) + 1

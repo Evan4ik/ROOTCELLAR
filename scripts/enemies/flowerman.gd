@@ -1,6 +1,7 @@
 extends WalkerE
 
 func _doPattern() -> void:
+	if (hp <= 0): return
 	if (targets.size() < 1):
 		var i = 0
 		
@@ -8,7 +9,11 @@ func _doPattern() -> void:
 			$anim.stop() 
 			$anim.play("digin")
 		
-		while(i < 180 and targets.size() < 1):
+		while(i < 180 and targets.size() < 1 and self.hp > 0):
+			if (get_tree().paused):
+				await get_tree().create_timer(0.1).timeout
+				continue
+				
 			self.rotation_degrees.y += 2.0
 			i += 1
 			await get_tree().create_timer(0.01).timeout
@@ -18,7 +23,12 @@ func _doPattern() -> void:
 		if (chase == null): chase = targets[0]
 		$anim.play("walk")
 		var i = 0
-		while(i < 500 and !anim):
+		while(i < 500 and !anim and self.hp > 0):
+			if (get_tree().paused):
+				await get_tree().create_timer(0.1).timeout
+				continue
+			
+			
 			if (self.global_position.distance_to(chase.global_position) > maxDistance):
 				targets.erase(chase)
 				chase = null

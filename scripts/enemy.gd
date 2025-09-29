@@ -8,6 +8,8 @@ class_name Enemy
 
 var hitTime:int = 0
 
+func _ready() -> void: self.add_to_group("enemy")
+
 func hit(damage):
 	hitTime += 25
 	doHitAnim()

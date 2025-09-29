@@ -88,6 +88,7 @@ func slice():
 			for child in currentFood.get_node("mesh").get_children(): child.visible = child.name == "sliced"
 			if(currentFood.descriptionMods.has("sliced")): currentFood.foodDescription = currentFood.descriptionMods["sliced"]
 			currentFood.foodName = "Sliced " + currentFood.foodName
+			currentFood.aMultiplier = ceil((currentFood.aMultiplier * 10) / 2.0) / 10.0
 			mouse(true)
 		await get_tree().create_timer(0.01).timeout
 	get_parent().get_parent().refreshFood(true)

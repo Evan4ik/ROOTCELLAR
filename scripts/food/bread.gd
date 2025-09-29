@@ -9,5 +9,5 @@ func _active():
 	player.changeHp(ceil(activeAmt), 0)
 
 func getDisplayNumbers():
-	var ret:Array = [ int(passiveAmt), int(activeAmt)]
+	var ret:Array = [ ceil(passiveAmt * pMultiplier), ceil(activeAmt * aMultiplier)]
 	return addMultColors(ret)

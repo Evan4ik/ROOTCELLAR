@@ -16,7 +16,10 @@ func _process(delta: float) -> void:
 	$anim.play("show" if (shown) else "hide")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if !shown else Input.MOUSE_MODE_VISIBLE
 	refreshFood(shown)
-	get_tree().paused = shown
+	player.paused = shown
+	player.description.hideDesc()
+	#get_tree().paused = shown
+	#Engine.time_scale = 0.0 if (shown) else 1.0
 
 
 func refreshFood(shown: bool):

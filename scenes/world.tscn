@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://mdx8pet3dbsg"]
+[gd_scene load_steps=32 format=3 uid="uid://mdx8pet3dbsg"]
 
 [ext_resource type="PackedScene" uid="uid://dy4bo3or4ynv" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://cjryc4l288s0t" path="res://scripts/foodcontainer.gd" id="3_qfnet"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://brjwm3hyyfqtb" path="res://scenes/food/pumpkin.tscn" id="15_xo05s"]
 [ext_resource type="PackedScene" uid="uid://bxx3x5pagmgq8" path="res://scenes/structures/exit.tscn" id="16_dss4m"]
 [ext_resource type="PackedScene" uid="uid://bpj06xxmb1fqu" path="res://scenes/enemies/flowerman.tscn" id="17_7t5mc"]
+[ext_resource type="PackedScene" uid="uid://dnets81x8dl6c" path="res://scenes/food/cheese.tscn" id="19_pm21f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3hyu"]
 albedo_color = Color(0.323495, 0.163479, 0.0957959, 1)
@@ -394,12 +395,14 @@ script = ExtResource("5_qfnet")
 [node name="bg" type="Panel" parent="ui/description"]
 offset_right = 252.0
 offset_bottom = 276.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_k0juu")
 
 [node name="text" type="RichTextLabel" parent="ui/description"]
 offset_left = 1.0
 offset_right = 256.0
 offset_bottom = 325.0
+mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.537255)
 theme_override_fonts/normal_font = ExtResource("5_4mrxx")
 bbcode_enabled = true
@@ -583,5 +586,9 @@ light_energy = 0.625
 light_volumetric_fog_energy = 4.213
 sky_mode = 1
 
-[node name="flowerman" parent="." instance=ExtResource("17_7t5mc")]
+[node name="flowerman" parent="." groups=["enemy"] instance=ExtResource("17_7t5mc")]
+process_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.328822, 0.123349786, -6.3403096)
+
+[node name="cheese" parent="." instance=ExtResource("19_pm21f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3570256, -0.50916773, -2.5633945)

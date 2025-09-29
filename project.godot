@@ -37,6 +37,7 @@ movie_writer/fps=120
 
 descriptionman="Yes!"
 player="you"
+enemy=""
 
 [input]
 

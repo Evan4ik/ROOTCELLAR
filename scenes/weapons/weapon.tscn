@@ -290,6 +290,7 @@ albedo_color = Color(1, 1, 1, 0.113725)
 sleeping = true
 freeze = true
 script = ExtResource("1_nqevj")
+weaponName = "Cleaver"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00585938, 0.26035, -0.0391541)
@@ -326,7 +327,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.613615)
 
 [node name="slash" type="CSGCylinder3D" parent="slash"]
-transform = Transform3D(0.90187, 0.24989, -0.161833, -0.432007, 0.521677, -0.337847, -3.12924e-07, 0.233705, 0.927184, -0.403, 0.529, -0.434)
+transform = Transform3D(0.9018702, 0.24988993, -0.16183266, -0.43200707, 0.5216771, -0.33784714, -3.2782555e-07, 0.23370501, 0.9271836, -0.403, 0.529, -0.434)
 radius = 0.812988
 height = 0.179138
 material = SubResource("StandardMaterial3D_eo7p8")

@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 			return
 		regenTime -= 0.1
 		await get_tree().create_timer(0.05).timeout
-	player.changeHp(passiveAmt, 0)
+	player.changeHp(floor(passiveAmt), 0)
 	regenTime = 60.0
 	generating = false
 

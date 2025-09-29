@@ -13,6 +13,9 @@ var temporaryHps:Dictionary[int, int] = {}
 
 @onready var weapon:Weapon
 
+
+var paused:bool = false
+
 func _ready() -> void: 
 	$cameraviewport.visible = true
 	$player.area_entered.connect(area)
@@ -42,6 +45,8 @@ func get_input(delta:float) -> void:
 	$cameratar.position.y = lerp($cameratar.position.y, 0.4 + sin(camBob) * 0.045, 0.15)
 	camera.get_node("wield").position.y = -$cameratar.position.y
 	
+	if (paused): return
+	
 	if Input.is_action_pressed("ui_end"): Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if Input.is_action_pressed("click") and weapon != null: weapon.swing()
 
@@ -58,6 +63,7 @@ func _input(event: InputEvent) -> void:
 	$cameratar.rotation_degrees.x = clamp($cameratar.rotation_degrees.x - event.relative.y, -75, 75)
 
 func _process(delta: float) -> void:
+	
 	get_input(delta)
 	camera.global_transform.origin = $cameratar.global_transform.origin
 	camera.global_rotation = $cameratar.global_rotation
